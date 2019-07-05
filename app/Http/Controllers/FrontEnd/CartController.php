@@ -28,8 +28,12 @@ class CartController extends Controller
       'weight' => $product->is_active,
       ]);
       Cart::associate($cart->rowId, 'App\Product');
-      Session::flash('success', 'Item added to cart.'); 
-      return redirect()->route('cart.view');
+      $notification = array(
+        'message' => 'Item added to cart.',
+        'alert-type' => 'success'
+      ); 
+      //Session::flash('success', 'Item added to cart.'); 
+      return redirect()->route('cart.view')->with($notification);
     }
     
   }
@@ -55,15 +59,23 @@ class CartController extends Controller
   public function cart_item_delete($id) 
   {
     Cart::remove($id);
-    Session::flash('alert', 'Item removed from successfully.'); 
-    return redirect()->back();
+    //Session::flash('alert', 'Item removed from successfully.');
+    $notification = array(
+      'message' => 'Item removed successfully.',
+      'alert-type' => 'success'
+    ); 
+    return redirect()->back()->with($notification);
   }
 
   public function cart_clear() 
   {
     Cart::destroy();
-    Session::flash('alert', 'Cart is empty.');
-    return redirect()->route('products.index');
+    //Session::flash('alert', 'Cart is empty.');
+    $notification = array(
+        'message' => 'Cart is cleared successfully.',
+        'alert-type' => 'error'
+    );
+    return redirect()->route('products.index')->with($notification);
   }
 
   public function cart_checkout() 
@@ -74,16 +86,24 @@ class CartController extends Controller
   public function increment($id, $qty)
   {
     Cart::update($id, $qty + 1);
-    Session::flash('success', 'Cart updated successfully.');
-    return redirect()->back();
+    $notification = array(
+      'message' => 'Item added to cart.',
+      'alert-type' => 'success'
+      ); 
+    //Session::flash('success', 'Cart updated successfully.');
+    return redirect()->back()->with($notification);
   }
 
   public function decrement($id, $qty)
   {
     $cart = Cart::content();
     Cart::update($id, $qty - 1);
-    Session::flash('success', 'Cart updated successfully.');
-    return redirect()->back();
+    $notification = array(
+      'message' => 'Item removed from cart.',
+      'alert-type' => 'warning'
+      ); 
+    //Session::flash('success', 'Cart updated successfully.');
+    return redirect()->back()->with($notification);
   }
 
 }

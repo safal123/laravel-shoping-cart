@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Stripe;
 use Cart;
+use Session;
 
 class CheckoutController extends Controller
 {
@@ -33,6 +34,7 @@ class CheckoutController extends Controller
       ]);
       //success
       Cart::destroy();
+      Session::flash('success', 'Purchase successfull.');
       return redirect()->back();
     } catch(Exception $e){
 
