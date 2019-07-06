@@ -23,7 +23,7 @@
                       <input type="hidden" name="qty" value="1" />
                       <input type="hidden" 
                         name="product_id" value="{{ $product->id }}"/> 
-                      <button class="btn btn-sm btn-info" onClick="addToCart()">
+                      <button class="btn btn-sm btn-info">
                         <i class="fa fa-shopping-cart"></i>
                         Add to cart
                       </button>
@@ -41,16 +41,4 @@
     </div>
   </div>
 </div>
-@endsection
-
-@section('extrajs')
-  <script>
-    function addToCart() {
-      console.log('hello');
-      $.ajax({
-        type:'POST',
-        url:'/cart'
-      });
-    }
-  </script>
 @endsection
