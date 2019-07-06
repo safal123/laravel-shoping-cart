@@ -6,7 +6,8 @@
       <div class="col-md-8">
         <h4 class="mb-3 text-navy">Billing address</h4>
         <hr>
-          <form action="{{ route('payment') }}" method="POST" id="payment-form">
+          <form action="{{ route('payment') }}" 
+            method="POST" id="payment-form">
           {{ csrf_field() }}
           <div class="row">
             
@@ -63,7 +64,7 @@
               <!-- A Stripe Element will be inserted here. -->
             </div>
             <!-- Used to display form errors. -->
-            <div id="card-errors" role="alert"></div>
+           <div id="card-errors" role="alert"></div>
           </div>
           <button class="btn btn-outline-dark">Submit Payment</button>
         </form>

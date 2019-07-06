@@ -7,12 +7,16 @@
         <div class="ibox">
           <div class="ibox-title mb-2">
             <span class="pull-right text-navy">(<strong>{{ $cartCount }}</strong>) items
-            <a href="{{ route('cart.clear') }}" class="btn btn-outline-danger"><i class="fa fa-trash"></i> Clear Cart</a>
+            @if($cartCount)
+              <a href="{{ route('cart.clear') }}" class="btn btn-outline-danger">
+                <i class="fa fa-trash"></i> Clear Cart
+              </a>
+            @endif
           </span>
-            @if($count=='true')
+            @if($cartCount)
               <h1 class="text-navy">Items on your cart</h1>
             @else 
-              <h5>Cart is empty.</h5>
+              <h1 class="text-navy">Cart is empty.</h1>
             @endif
             
           </div>
@@ -55,11 +59,12 @@
                       <a href="{{route('cart.increment', ['id' => $product->rowId, 'qty'=>$product->qty])}}" class="btn btn-sm btn-outline-info">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                       </a>
-                      <input type="text" value="{{ $product->qty }}" class="item-quantity bg-info" disabled>
+                      
                       <a href="{{route('cart.decrement', ['id' => $product->rowId, 'qty'=>$product->qty])}}" class="btn btn-sm btn-outline-danger">
                         <i class="fa fa-minus" aria-hidden="true"></i>
                       </a>
                       </div>
+                      <input type="text" value="{{ $product->qty }}" class="item-quantity" disabled>
                     </td>
                     <td>
                       <h4>
@@ -76,19 +81,23 @@
             <a href="{{ route('products.index') }}" class="btn btn-outline-dark">
               <i class="fa fa-arrow-left"></i> Continue shopping
             </a>
-            <a href="{{ route('cart.checkout') }}" class="btn btn-outline-primary pull-right">
-              <i class="fa fa fa-shopping-cart"></i> Checkout
-            </a>
+            @if($cartCount)
+              <a href="{{ route('cart.checkout') }}" class="btn btn-outline-primary pull-right">
+                <i class="fa fa fa-shopping-cart"></i> Checkout
+              </a>
+            @endif
           </div>
         </div>
       </div>
+      
       <div class="col-md-3">
+        @if($cartCount)
           <div class="ibox">
               <div class="ibox-title">
                   <h5>Cart Summary</h5>
               </div>
               <div class="ibox-content">
-                  <table class="table table-dark">
+                  <table class="table table-hover">
                     <tr>
                       <td>Price:</td>
                       <td>${{ $subTotal }}</td>
@@ -97,7 +106,7 @@
                       <td>Tax:</td>
                       <td>${{ $tax }}</td>
                     </tr>
-                    <tr class="bg-info">
+                    <tr class="bg-success">
                       <td>Total:</td>
                       <td>${{ $total }}</td>
                     </tr>
@@ -118,7 +127,7 @@
                   </div>
               </div>
           </div>
-
+        @endif
           <div class="ibox">
               <div class="ibox-title">
                   <h5>Support</h5>

@@ -146,8 +146,9 @@ table.shoping-cart-table tr td:last-child {
 }
 
 .item-quantity{
-  width: 20px;
+  width: 30px;
   text-align: center;
+  outline: none;
 }
 
 .cart-add{

@@ -147,7 +147,7 @@
           }
         @endif
       </script>
-      
+      <script src="{{ asset('js/main.js') }}" defer></script>
   </body>
 </html>
 

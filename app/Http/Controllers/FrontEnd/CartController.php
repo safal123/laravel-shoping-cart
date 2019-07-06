@@ -13,13 +13,15 @@ class CartController extends Controller
   //middleware to check is cart is empty
   public function __construct()
    {
-      $this->middleware('isCartEmpty')->except('add_to_cart');
+      $this->middleware('isCartEmpty')->except('add_to_cart', 'view_cart');
    }
 
   public function add_to_cart(Request $request)
   {
     $product = Product::find($request->product_id);
+
     if($product) {
+
       $cart = Cart::add([
       'id' => $product->id,
       'name' => $product->name,
@@ -27,11 +29,15 @@ class CartController extends Controller
       'price' => $product->price,
       'weight' => $product->is_active,
       ]);
+
       Cart::associate($cart->rowId, 'App\Product');
+
       $notification = array(
         'message' => 'Item added to cart.',
         'alert-type' => 'success'
       ); 
+      
+      
       //Session::flash('success', 'Item added to cart.'); 
       return redirect()->route('cart.view')->with($notification);
     }
@@ -59,22 +65,24 @@ class CartController extends Controller
   public function cart_item_delete($id) 
   {
     Cart::remove($id);
-    //Session::flash('alert', 'Item removed from successfully.');
+
     $notification = array(
       'message' => 'Item removed successfully.',
       'alert-type' => 'success'
     ); 
+
     return redirect()->back()->with($notification);
   }
 
   public function cart_clear() 
   {
     Cart::destroy();
-    //Session::flash('alert', 'Cart is empty.');
+
     $notification = array(
         'message' => 'Cart is cleared successfully.',
         'alert-type' => 'error'
     );
+
     return redirect()->route('products.index')->with($notification);
   }
 
@@ -86,23 +94,26 @@ class CartController extends Controller
   public function increment($id, $qty)
   {
     Cart::update($id, $qty + 1);
+
     $notification = array(
       'message' => 'Item added to cart.',
       'alert-type' => 'success'
       ); 
-    //Session::flash('success', 'Cart updated successfully.');
+
     return redirect()->back()->with($notification);
   }
 
   public function decrement($id, $qty)
   {
     $cart = Cart::content();
+
     Cart::update($id, $qty - 1);
+
     $notification = array(
       'message' => 'Item removed from cart.',
       'alert-type' => 'warning'
       ); 
-    //Session::flash('success', 'Cart updated successfully.');
+
     return redirect()->back()->with($notification);
   }
 
