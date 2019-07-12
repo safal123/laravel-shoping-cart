@@ -13,34 +13,38 @@
             
             <div class="col-md-6 mb-3">
               <label for="firstName">First name</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="">
-              <div class="invalid-feedback">
+              <input type="text" name="first_name" class="form-control" id="firstName">
+              <!-- <div class="invalid-feedback">
                 Valid first name is required.
-              </div>
+              </div> -->
             </div>
             <div class="col-md-6 mb-3">
               <label for="lastName">Last name</label>
-              <input type="text" class="form-control" id="lastName" placeholder="" value="">
-              <div class="invalid-feedback">
+              <input type="text" class="form-control" name="last_name" id="lastName">
+              <!-- <div class="invalid-feedback">
                 Valid last name is required.
-              </div>
+              </div> -->
             </div>
           </div>
 
           <div class="mb-3">
-            <label for="email">Email <span class="text-muted">(Optional)</span></label>
-            <input type="email" class="form-control" id="email" placeholder="you@example.com">
-            <div class="invalid-feedback">
+            <label for="billing_email">Billing Email</label>
+            <input type="email" name="billing_email" class="form-control" id="email" placeholder="you@example.com">
+            <!-- <div class="invalid-feedback">
               Please enter a valid email address for shipping updates.
-            </div>
+            </div> -->
           </div>
 
           <div class="mb-3">
-            <label for="address">Address</label>
-            <input type="text" class="form-control" id="address" placeholder="1234 Main St">
-            <div class="invalid-feedback">
+            <label for="address">Billing Address</label>
+            <input type="text" name="billing_address" class="form-control" id="address" placeholder="1234 Main St">
+            <!-- <div class="invalid-feedback">
               Please enter your shipping address.
-            </div>
+            </div> -->
+          </div>
+          <div class="mb-3">
+            <label for="address">Phone</label>
+            <input type="text" name="billing_phone"  class="form-control" id="phone">
           </div>
 
           <h4 class="mb-3 text-navy">Payment</h4>
@@ -55,6 +59,10 @@
               <label class="custom-control-label" for="paypal">Paypal</label>
             </div>
 
+          </div>
+          <div class="mb-3">
+            <label for="address">Name on Card</label>
+            <input type="text" name="billing_name_on_card"  class="form-control" id="phone">
           </div>
           <div class="form-group">
             <label for="card-element">

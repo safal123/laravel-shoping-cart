@@ -10,7 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Route::view('/react/{path?}', 'react.layout');
+Route::get('/react/{path?}',[
+  'uses' => 'ReactController@index',
+  'as' => 'react'
+]);
 Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 Route::resource('products', 'Frontend\ProductsController');
@@ -59,3 +63,7 @@ Route::get('/cart/decrement/{id}/{qty}',[
   'uses' => 'FrontEnd\CartController@decrement',
   'as' => 'cart.decrement'
 ]);
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

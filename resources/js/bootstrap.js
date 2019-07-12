@@ -40,3 +40,5 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+import 'bootstrap/dist/css/bootstrap.min.css';

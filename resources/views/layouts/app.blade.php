@@ -20,6 +20,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     
 
@@ -41,10 +42,10 @@
                 <li class="nav-item">
                   <a href="{{ route('products.index')}}" class="nav-link">All Products</a>
                 </li>
-                <!-- <li class="nav-item">
-                  <a href="#" class="nav-link">Books</a>
-                </li>
                 <li class="nav-item">
+                  <a href="{{ route('react') }}" class="nav-link">React</a>
+                </li>
+                <!--<li class="nav-item">
                   <a href="#" class="nav-link">Home Appliances</a>
                 </li> -->
               </ul>
@@ -123,6 +124,8 @@
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
       @yield('extrajs')
       <script>
