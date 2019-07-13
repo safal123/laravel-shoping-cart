@@ -43,7 +43,9 @@
                   <a href="{{ route('products.index')}}" class="nav-link">All Products</a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('react') }}" class="nav-link">React</a>
+                  <a href="{{ route('react') }}" class="nav-link">
+                    React
+                  </a>
                 </li>
                 <!--<li class="nav-item">
                   <a href="#" class="nav-link">Home Appliances</a>

@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Header from './header';
 import Landing from './landing';
-import Products from './products';
+import Products from './products/products';
 
 class Router extends Component {
   render() {
