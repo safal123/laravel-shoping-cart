@@ -4,13 +4,20 @@ import { Provider } from 'react-redux';
 
 import configureStore from '../store';
 import Router from './router';
+import Footer from './footer';
+
 
 const store = configureStore();
 
 export default class HomeComponent extends Component {
   render() {
     return (
-      <Router />
+      <div>
+        <div style={{ minHeight: "100vh" }}>
+          <Router />
+        </div>
+        <Footer />
+      </div>
     );
   }
 }

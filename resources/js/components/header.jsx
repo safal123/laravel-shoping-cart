@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import {
   Collapse,
@@ -28,6 +29,7 @@ class Header extends Component {
   }
 
   render() {
+    const cartTotalItems = this.props.totalItems;
     return (
       <div>
         <Navbar className="" color="dark" dark expand="md">
@@ -49,9 +51,17 @@ class Header extends Component {
               </Nav>
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <NavLink href="#">
-                    <i className="fa fa-shopping-cart"></i> Cart
-                  </NavLink>
+                  <Link to="/react/cart" className="nav-link">
+                    <i className="fa fa-shopping-cart"></i>
+                    Cart
+                    <span className="text-light"
+                      style={{
+                        verticalAlign: "super",
+                        fontSize: "smaller"
+                      }}>
+                      ({cartTotalItems})
+                    </span>
+                  </Link>
                 </NavItem>
                 <NavItem>
                   <NavLink href="#">
@@ -72,4 +82,9 @@ class Header extends Component {
   }
 }
 
-export default Header;
+const mapStateToProps = state => ({
+  totalItems: state.cart.totalItems,
+});
+
+
+export default connect(mapStateToProps)(Header);

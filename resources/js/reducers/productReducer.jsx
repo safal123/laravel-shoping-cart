@@ -1,4 +1,3 @@
-import React from 'react';
 import * as actionType from '../actions/actionType';
 
 // initial state
@@ -10,6 +9,7 @@ const initialState = {
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionType.ALL_PRODUCTS:
+      const item = action.payload
       return {
         ...state,
         products: action.payload

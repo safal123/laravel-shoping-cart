@@ -21,6 +21,6 @@ class ProductsTableSeeder extends Seeder
         //   'discount' => 13.00
         // ]);
 
-        factory(App\Product::class, 10)->create();
+        factory(App\Product::class, 20)->create();
     }
 }

@@ -17,11 +17,7 @@ class ProductsController extends Controller
     {
         $products = Product::paginate(8);
         if($products) {
-          //dd($products);
-          //return view('frontend.products.index', compact('products', $products));
-          return response()->json([
-            $products
-          ], 200);
+          return view('frontend.products.index', compact('products', $products));
         } else {
           return view('front.product.index', compact('message', 'No Products found.'));
         }
