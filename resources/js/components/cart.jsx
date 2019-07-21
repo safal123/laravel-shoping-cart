@@ -2,10 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux';
 
 const cart = (props) => {
-  const products = props.products
+
+  // All products from the cart item
+  const products = props.products;
+
   if (products.length > 0) {
     return (
       <div className="container">
+        <h1>Items on cart. Total Items : { props.totalItems }</h1>
         <table id="cart" className="table table-hover table-condensed mt-2">
           <thead className="bg-info">
             <tr>
@@ -17,26 +21,30 @@ const cart = (props) => {
             </tr>
           </thead>
           <tbody>
-            {products.map(product => (
+            { products.map(product => (
               <tr key={product.id}>
                 <td>
                   {product.name}
                 </td>
-                <td>$1.99</td>
+                <td>${product.price.toFixed(2)}</td>
                 <td>
+                  {product.quantity}
                 </td>
                 <td>
-                  1.99
-                    </td>
+                  ${(product.price.toFixed(2)) * 1 }
+                </td>
                 <td>
                   <a href="#" className="btn btn-danger">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <i className="fa fa-trash" aria-hidden="true"></i>
                   </a>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        <div>
+          Total Price: ${props.totalPrice.toFixed(2)}
+        </div>
       </div>
     )
   }
@@ -53,6 +61,8 @@ const cart = (props) => {
 
 const mapStateToProps = state => ({
   products: state.cart.items,
+  totalPrice: state.cart.totalPrice,
+  totalItems: state.cart.totalItems
 });
 
 export default connect(mapStateToProps)(cart);

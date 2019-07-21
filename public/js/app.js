@@ -78710,12 +78710,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var cart = function cart(props) {
+  // All products from the cart item
   var products = props.products;
 
   if (products.length > 0) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "container"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Items on cart. Total Items : ", props.totalItems), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
       id: "cart",
       className: "table table-hover table-condensed mt-2"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", {
@@ -78744,14 +78745,14 @@ var cart = function cart(props) {
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, products.map(function (product) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
         key: product.id
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "$1.99"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "1.99"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "$", product.price.toFixed(2)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "$", product.price.toFixed(2) * 1), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "#",
         className: "btn btn-danger"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        "class": "fa fa-trash",
+        className: "fa fa-trash",
         "aria-hidden": "true"
       }))));
-    }))));
+    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Total Price: $", props.totalPrice.toFixed(2)));
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "container mt-2"
@@ -78763,7 +78764,9 @@ var cart = function cart(props) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    products: state.cart.items
+    products: state.cart.items,
+    totalPrice: state.cart.totalPrice,
+    totalItems: state.cart.totalItems
   };
 };
 
@@ -79302,7 +79305,6 @@ function (_Component) {
   _createClass(Product, [{
     key: "handleClick",
     value: function handleClick(product) {
-      console.log(product);
       this.props.addToCart(product);
     }
   }, {
@@ -79567,13 +79569,35 @@ var cartReducer = function cartReducer() {
 
   switch (action.type) {
     case _actions_actionType__WEBPACK_IMPORTED_MODULE_0__["ADD_TO_CART"]:
-      var itemCount = state.totalItems + 1;
-      var priceSum = state.totalPrice + action.payload.price;
-      return _objectSpread({}, state, {
-        items: [].concat(_toConsumableArray(state.items), [action.payload]),
-        totalItems: itemCount,
-        totalPrice: priceSum
+      // count the item on cart
+      var itemCount = state.totalItems + 1; // add the total price
+
+      var priceSum = state.totalPrice + action.payload.price; // find the item added on the cart
+
+      var addedItem = state.items.find(function (item) {
+        return item.id === action.payload.id;
       });
+
+      if (addedItem) {
+        addedItem.quantity += 1;
+        return _objectSpread({}, state, {
+          items: state.items,
+          totalItems: itemCount,
+          totalPrice: priceSum
+        });
+      } else {
+        action.payload.quantity = 0;
+        action.payload.quantity += 1;
+        var items = [].concat(_toConsumableArray(state.items), [action.payload]);
+
+        var distItems = _toConsumableArray(new Set(items));
+
+        return _objectSpread({}, state, {
+          items: distItems,
+          totalItems: itemCount,
+          totalPrice: priceSum
+        });
+      }
 
     default:
       return state;

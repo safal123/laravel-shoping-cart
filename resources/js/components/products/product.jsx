@@ -11,7 +11,6 @@ class Product extends Component {
   }
 
   handleClick(product) {
-    console.log(product);
     this.props.addToCart(product);
   }
 
