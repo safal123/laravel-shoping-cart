@@ -1,5 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+import { cleartCart, removeFromCart } from '../actions/cartAction';
 
 const cart = (props) => {
 
@@ -9,15 +12,25 @@ const cart = (props) => {
   if (products.length > 0) {
     return (
       <div className="container">
-        <h1>Items on cart. Total Items : { props.totalItems }</h1>
+        <div className="d-flex flex-row">
+          <div className="p-2">
+            <h1>Items on cart. Total Items : { props.totalItems }</h1>
+          </div>
+          <div className="p-2 justify-content-right">
+            <button className="btn btn-danger ml-0" onClick={props.cleartCart}>
+              Clear cart
+            </button>
+          </div>
+        </div>
+        
         <table id="cart" className="table table-hover table-condensed mt-2">
           <thead className="bg-info">
             <tr>
               <th style={{ width: "50%" }}>Product</th>
               <th style={{ width: "10%" }}>Price</th>
-              <th style={{ width: "8%" }}>Quantity</th>
-              <th style={{ width: "22%" }} className="text-center">Subtotal</th>
-              <th style={{ width: "10%" }}></th>
+              <th style={{ width: "13%" }}>Quantity</th>
+              <th style={{ width: "22%" }}>Subtotal</th>
+              <th style={{ width: "5%" }}></th>
             </tr>
           </thead>
           <tbody>
@@ -26,23 +39,35 @@ const cart = (props) => {
                 <td>
                   {product.name}
                 </td>
-                <td>${product.price.toFixed(2)}</td>
                 <td>
-                  {product.quantity}
+                  ${product.price.toFixed(2)}
                 </td>
                 <td>
-                  ${(product.price.toFixed(2)) * 1 }
+                  <div className="row">
+                    <i className="fa fa-minus btn btn-info" aria-hidden="true"></i>
+                    <div className="mt-3">{product.quantity}</div>
+                    <i className="fa fa-plus btn btn-info" aria-hidden="true"></i>
+                  </div>
+                  
                 </td>
                 <td>
-                  <a href="#" className="btn btn-danger">
+                  ${(product.price.toFixed(2)) * product.quantity }
+                </td>
+                <td>
+                  <button href="#" className="btn btn-danger" onClick={ () => props.removeFromCart(product) }>
                     <i className="fa fa-trash" aria-hidden="true"></i>
-                  </a>
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        <div>
+        <hr/>
+        <div className="">
+          <Link to="/react/allProducts" className="btn btn-success">
+            <i className="fa fa-hand-o-left" aria-hidden="true"></i> &nbsp;
+            Continue shopping
+          </Link>
           Total Price: ${props.totalPrice.toFixed(2)}
         </div>
       </div>
@@ -65,6 +90,6 @@ const mapStateToProps = state => ({
   totalItems: state.cart.totalItems
 });
 
-export default connect(mapStateToProps)(cart);
+export default connect(mapStateToProps, { cleartCart, removeFromCart })(cart);
 
 

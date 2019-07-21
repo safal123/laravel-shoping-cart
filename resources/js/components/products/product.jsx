@@ -26,7 +26,7 @@ class Product extends Component {
                 <h5 className="card-title">{product.name}</h5>
                 <div className="row">
                   <div className="col-md-5">
-                    AUD {product.price.toFixed(2)}
+                    AUD { product.price.toFixed(2) }
                   </div>
                   <div className="col-md-7">
                     <button className="btn btn-sm btn-success" onClick={() => { this.handleClick(product) }}>

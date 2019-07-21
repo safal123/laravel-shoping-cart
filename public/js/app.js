@@ -78522,15 +78522,19 @@ module.exports = function(module) {
 /*!*********************************************!*\
   !*** ./resources/js/actions/actionType.jsx ***!
   \*********************************************/
-/*! exports provided: ALL_PRODUCTS, ADD_TO_CART */
+/*! exports provided: ALL_PRODUCTS, ADD_TO_CART, CLEAR_CART, REMOVE_FROM_CART */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ALL_PRODUCTS", function() { return ALL_PRODUCTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_TO_CART", function() { return ADD_TO_CART; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_CART", function() { return CLEAR_CART; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FROM_CART", function() { return REMOVE_FROM_CART; });
 var ALL_PRODUCTS = "ALL_PRODUCTS";
 var ADD_TO_CART = "ADD_TO_CART";
+var CLEAR_CART = "CLEAR_CART";
+var REMOVE_FROM_CART = "REMOVE_FROM_CART";
 
 /***/ }),
 
@@ -78538,18 +78542,31 @@ var ADD_TO_CART = "ADD_TO_CART";
 /*!*********************************************!*\
   !*** ./resources/js/actions/cartAction.jsx ***!
   \*********************************************/
-/*! exports provided: addToCart */
+/*! exports provided: addToCart, removeFromCart, cleartCart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addToCart", function() { return addToCart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeFromCart", function() { return removeFromCart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleartCart", function() { return cleartCart; });
 /* harmony import */ var _actions_actionType__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/actionType */ "./resources/js/actions/actionType.jsx");
 
 var addToCart = function addToCart(product) {
   return {
     type: _actions_actionType__WEBPACK_IMPORTED_MODULE_0__["ADD_TO_CART"],
     payload: product
+  };
+};
+var removeFromCart = function removeFromCart(product) {
+  return {
+    type: _actions_actionType__WEBPACK_IMPORTED_MODULE_0__["REMOVE_FROM_CART"],
+    payload: product
+  };
+};
+var cleartCart = function cleartCart() {
+  return {
+    type: _actions_actionType__WEBPACK_IMPORTED_MODULE_0__["CLEAR_CART"]
   };
 };
 
@@ -78705,7 +78722,11 @@ if (token) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_cartAction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/cartAction */ "./resources/js/actions/cartAction.jsx");
+
+
 
 
 
@@ -78716,7 +78737,16 @@ var cart = function cart(props) {
   if (products.length > 0) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "container"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Items on cart. Total Items : ", props.totalItems), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "d-flex flex-row"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "p-2"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Items on cart. Total Items : ", props.totalItems)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "p-2 justify-content-right"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "btn btn-danger ml-0",
+      onClick: props.cleartCart
+    }, "Clear cart"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
       id: "cart",
       className: "table table-hover table-condensed mt-2"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", {
@@ -78731,28 +78761,48 @@ var cart = function cart(props) {
       }
     }, "Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
       style: {
-        width: "8%"
+        width: "13%"
       }
     }, "Quantity"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
       style: {
         width: "22%"
-      },
-      className: "text-center"
+      }
     }, "Subtotal"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
       style: {
-        width: "10%"
+        width: "5%"
       }
     }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, products.map(function (product) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
         key: product.id
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "$", product.price.toFixed(2)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "$", product.price.toFixed(2) * 1), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "$", product.price.toFixed(2)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fa fa-minus btn btn-info",
+        "aria-hidden": "true"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "mt-3"
+      }, product.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fa fa-plus btn btn-info",
+        "aria-hidden": "true"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "$", product.price.toFixed(2) * product.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         href: "#",
-        className: "btn btn-danger"
+        className: "btn btn-danger",
+        onClick: function onClick() {
+          return props.removeFromCart(product);
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fa fa-trash",
         "aria-hidden": "true"
       }))));
-    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Total Price: $", props.totalPrice.toFixed(2)));
+    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: ""
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/react/allProducts",
+      className: "btn btn-success"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: "fa fa-hand-o-left",
+      "aria-hidden": "true"
+    }), " \xA0 Continue shopping"), "Total Price: $", props.totalPrice.toFixed(2)));
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "container mt-2"
@@ -78770,7 +78820,10 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(cart));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
+  cleartCart: _actions_cartAction__WEBPACK_IMPORTED_MODULE_3__["cleartCart"],
+  removeFromCart: _actions_cartAction__WEBPACK_IMPORTED_MODULE_3__["removeFromCart"]
+})(cart));
 
 /***/ }),
 
@@ -79568,6 +79621,7 @@ var cartReducer = function cartReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
+    //add item to cart
     case _actions_actionType__WEBPACK_IMPORTED_MODULE_0__["ADD_TO_CART"]:
       // count the item on cart
       var itemCount = state.totalItems + 1; // add the total price
@@ -79598,6 +79652,32 @@ var cartReducer = function cartReducer() {
           totalPrice: priceSum
         });
       }
+
+    // clear item from cart
+
+    case _actions_actionType__WEBPACK_IMPORTED_MODULE_0__["CLEAR_CART"]:
+      return _objectSpread({}, initialState);
+    // remove an item from cart
+
+    case _actions_actionType__WEBPACK_IMPORTED_MODULE_0__["REMOVE_FROM_CART"]:
+      var itemToRemove = state.items.find(function (item) {
+        return item.id === action.payload.id;
+      });
+      var new_items = state.items.filter(function (item) {
+        return action.payload.id !== item.id;
+      });
+      var newTotalPrice = state.totalPrice - itemToRemove.price * itemToRemove.quantity;
+      var newTotalItemCount = state.totalItems - itemToRemove.quantity;
+
+      if (newTotalPrice < 0) {
+        newTotalPrice = 0;
+      }
+
+      return _objectSpread({}, state, {
+        items: new_items,
+        totalPrice: newTotalPrice,
+        totalItems: newTotalItemCount
+      });
 
     default:
       return state;
