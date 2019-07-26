@@ -1,4 +1,5 @@
 import * as actionType from '../actions/actionType';
+import * as stringType from '../strings';
 
 export const addToCart = (product) => {
     return {
@@ -14,8 +15,24 @@ export const removeFromCart = (product) => {
   }
 }
 
-export const cleartCart = () => {
+export const clearCart = () => {
+  const message = stringType.YOUR_CART_IS_CLEARED;
+  return  {
+    type: actionType.CLEAR_CART,
+    payload: message
+  }
+}
+
+export const increaseItem = (product) => {
   return {
-    type: actionType.CLEAR_CART
+    type: actionType.INCREASE_ITEM,
+    payload: product
+  }
+}
+
+export const decreaseItem = (product) => {
+  return {
+    type: actionType.DECREASE_ITEM,
+    payload: product
   }
 }

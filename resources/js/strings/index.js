@@ -1,0 +1,1 @@
+export const YOUR_CART_IS_CLEARED = "Your cart is cleared.";
