@@ -19,10 +19,10 @@ class Products extends Component {
     }
     else {
       return (
-        <div className="py-4 container">
+        <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <div className="d-flex p-2 bg-info justify-content-center">
+              <div className="d-flex mt-1 bg-success justify-content-center">
                 <h1>All Products</h1>
               </div>
               

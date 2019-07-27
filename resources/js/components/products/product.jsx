@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { addToCart } from '../../actions/cartAction';
 
@@ -17,16 +18,21 @@ class Product extends Component {
   render() {
     return (
       <div className="row">
-        { this.props.products && this.props.products.map(product => (
-          <div className="col-md-4 mt-1" key={product.id}>
+        {this.props.products && this.props.products.map(product => (
+          <div className="col-md-4 mt-1" key={ product.id }>
             <div className="card">
-              <img className="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(81).jpg" alt="Card image cap" />
+              <Link to={`/react/allProducts/${product.id}`}>
+                <img
+                  className="card-img-top"
+                  src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(81).jpg"
+                  alt="Card image cap" />
+              </Link>
               <div className="card-body">
                 <hr />
                 <h5 className="card-title">{product.name}</h5>
                 <div className="row">
                   <div className="col-md-5">
-                    AUD { product.price.toFixed(2) }
+                    AUD {product.price.toFixed(2)}
                   </div>
                   <div className="col-md-7">
                     <button className="btn btn-sm btn-success" onClick={() => { this.handleClick(product) }}>

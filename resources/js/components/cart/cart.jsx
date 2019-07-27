@@ -61,7 +61,7 @@ const cart = (props) => {
                   </div>
                 </td>
                 <td>
-                  ${(product.price.toFixed(2)) * product.quantity}
+                  ${((product.price.toFixed(2)) * product.quantity).toFixed(2)}
                 </td>
                 <td>
                   <button className="btn btn-danger"
@@ -76,7 +76,7 @@ const cart = (props) => {
               <td></td>
               <td></td>
               <td>
-                Total Price: ${props.totalPrice.toFixed(2)}
+                <h5>Total Price: ${props.totalPrice.toFixed(2)}</h5>
               </td>
               <td></td>
             </tr>

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import configureStore from '../store';
-import Router from './router';
+import RouterPage from './router';
 import Footer from './footer';
 
 
@@ -14,7 +14,7 @@ export default class HomeComponent extends Component {
     return (
       <div>
         <div style={{ minHeight: "100vh" }}>
-          <Router />
+          <RouterPage />
         </div>
         <Footer />
       </div>

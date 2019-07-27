@@ -6,7 +6,6 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,
@@ -35,7 +34,7 @@ class Header extends Component {
         <Navbar className="" color="dark" dark expand="md">
           <div className="container">
             <Link to="/react" className="navbar-brand">
-              <i className="fa fa-home"></i> Shop
+              <i className="fa fa-home"></i>Shop
             </Link>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
@@ -44,7 +43,7 @@ class Header extends Component {
                   <Link to="/react/allProducts" className="nav-link">All Products</Link>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/">
+                  <NavLink href="/" className="nav-link">
                     <i className="fa fa-react"></i>Laravel
                   </NavLink>
                 </NavItem>
@@ -64,9 +63,9 @@ class Header extends Component {
                   </Link>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="#">
+                  <Link to="/react/login" className="nav-link">
                     <i className="fa fa-user"></i> Login
-                  </NavLink>
+                  </Link>
                 </NavItem>
                 <NavItem>
                   <NavLink href="#">

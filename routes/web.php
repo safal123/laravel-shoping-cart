@@ -10,11 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Route::view('/react/{path?}', 'react.layout');
-Route::get('/react/{path?}',[
+// Redirect all the rotues from react to react router
+Route::get('/react/{path?}/',[
   'uses' => 'ReactController@index',
   'as' => 'react'
-]);
+])->where('path', '.*');
+
+
 Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 Route::resource('products', 'Frontend\ProductsController');
