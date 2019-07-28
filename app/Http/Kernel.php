@@ -61,6 +61,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'isCartEmpty'=> \App\Http\Middleware\CheckCartIsEmpty::class,
+        'jwt-auth' => \App\Http\Middleware\jwtMiddleware::class,
     ];
 
     /**

@@ -66,6 +66,3 @@ Route::get('/cart/decrement/{id}/{qty}',[
   'as' => 'cart.decrement'
 ]);
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
