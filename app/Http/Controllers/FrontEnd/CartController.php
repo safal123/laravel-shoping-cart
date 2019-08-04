@@ -36,10 +36,8 @@ class CartController extends Controller
         'message' => 'Item added to cart.',
         'alert-type' => 'success'
       ); 
-      
-      
-      //Session::flash('success', 'Item added to cart.'); 
-      return redirect()->route('cart.view')->with($notification);
+      Session::flash('success', 'Item added to cart.');
+      return redirect()->back()->with($notification);
     }
     
   }

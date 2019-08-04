@@ -1,25 +1,13 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-// Redirect all the rotues from react to react router
 Route::get('/react/{path?}/',[
   'uses' => 'ReactController@index',
   'as' => 'react'
 ])->where('path', '.*');
 
-
-Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
-Route::resource('products', 'Frontend\ProductsController');
+Route::get('/', 'HomeController@index')->name('home');
+Route::resource('/products', 'Frontend\ProductsController');
 
 Route::get('/cart',[
   'uses' => 'FrontEnd\CartController@view_cart',

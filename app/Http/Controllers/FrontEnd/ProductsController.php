@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\FrontEnd;
 
 use App\Product;
+use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -17,7 +18,8 @@ class ProductsController extends Controller
     {
         $products = Product::paginate(8);
         if($products) {
-          return view('frontend.products.index', compact('products', $products));
+          return view('frontend.products.index')
+                ->with('products', $products);
         } else {
           return view('front.product.index', compact('message', 'No Products found.'));
         }

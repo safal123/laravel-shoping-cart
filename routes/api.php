@@ -17,6 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Route::get('/products', 'Api\ProductController@index')->middleware('jwt.auth');
 Route::get('/products', 'Api\ProductController@index');
 
 Route::post('/login',[
