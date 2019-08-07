@@ -14,9 +14,18 @@ class LoginController extends Controller
       //$token = auth()->attempt($data);
 
       if(!$token = auth()->attempt($data)) {
-        return response()->json(['error' => 'Invalid email/password'], 401);
+  
+        return response()->json(['error' => 'Invalid email/password.'], 401);
+      
       }
-
-      return response()->json(['token' => $token]);
+      $user = [
+        'id' => auth()->user()->id,
+        'name' => auth()->user()->name,
+        'email' => auth()->user()->email,
+      ];
+      return response()->json([
+        'user' => $user,
+        'token' => $token
+        ]);
     }
 }

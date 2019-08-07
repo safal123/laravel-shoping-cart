@@ -97390,8 +97390,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var redux_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-form */ "./node_modules/redux-form/es/index.js");
-/* harmony import */ var _validation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../validation */ "./resources/js/validation/index.jsx");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _loader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./loader */ "./resources/js/components/loader.jsx");
+/* harmony import */ var redux_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux-form */ "./node_modules/redux-form/es/index.js");
+/* harmony import */ var _validation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../validation */ "./resources/js/validation/index.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -97420,6 +97423,9 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
+;
+
+
 
 var renderInput = function renderInput(_ref) {
   var input = _ref.input,
@@ -97439,58 +97445,124 @@ var Login =
 function (_Component) {
   _inherits(Login, _Component);
 
-  function Login() {
+  function Login(props) {
+    var _this;
+
     _classCallCheck(this, Login);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Login).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Login).call(this, props));
+    _this.state = {
+      message: '',
+      isLoading: false
+    };
+    return _this;
   }
 
   _createClass(Login, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var auth = window.localStorage.getItem('auth');
+
+      if (auth) {
+        this.props.history.push("/react");
+      }
+    }
+  }, {
+    key: "submitLoginForm",
+    value: function submitLoginForm(formValues, dispatch) {
+      var _this2 = this;
+
+      this.setState({
+        isLoading: true
+      });
+      var data = {
+        email: formValues.email,
+        password: formValues.password
+      };
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("http://localhost:8000/api/login", data).then(function (res) {
+        dispatch(Object(redux_form__WEBPACK_IMPORTED_MODULE_4__["reset"])("loginForm"));
+        var token = res.data.token;
+        window.localStorage.setItem("auth", token);
+
+        _this2.setState({
+          isLoading: false
+        });
+
+        _this2.props.history.push("/react");
+
+        console.log(res.data);
+      })["catch"](function (error) {
+        _this2.setState({
+          message: error.response.data.error
+        });
+
+        dispatch(Object(redux_form__WEBPACK_IMPORTED_MODULE_4__["reset"])("loginForm"));
+
+        _this2.setState({
+          isLoading: false
+        });
+
+        _this2.props.history.push("/react/login");
+
+        console.log(error.response.data.error);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var handleSubmit = this.props.handleSubmit;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row justify-content-center mt-2"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-lg-10"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-header d-flex justify-content-center"
-      }, "Login Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-body"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_2__["Field"], {
-        name: "email",
-        label: "Email",
-        type: "email",
-        component: renderInput,
-        className: "form-control",
-        validate: [_validation__WEBPACK_IMPORTED_MODULE_3__["required"], _validation__WEBPACK_IMPORTED_MODULE_3__["email"]]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_2__["Field"], {
-        name: "password",
-        label: "Password",
-        component: renderInput,
-        className: "form-control",
-        type: "password",
-        validate: [_validation__WEBPACK_IMPORTED_MODULE_3__["required"], Object(_validation__WEBPACK_IMPORTED_MODULE_3__["minValue"])(5)]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row bootom card-footer"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "submit",
-        disabled: this.props.invalid || this.props.submitting || this.props.pristine,
-        className: "btn btn-primary"
-      }, "Submit"))))))));
+
+      if (this.state.isLoading) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_loader__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+      } else {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "row justify-content-center mt-2"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-lg-10"
+        }, this.state.message ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "alert alert-danger",
+          role: "alert"
+        }, this.state.message) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "card"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "card-header d-flex justify-content-center bg-info"
+        }, "Login Page"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "card-body"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+          onSubmit: handleSubmit(this.submitLoginForm.bind(this))
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_4__["Field"], {
+          name: "email",
+          label: "Email",
+          type: "email",
+          component: renderInput,
+          className: "form-control",
+          validate: [_validation__WEBPACK_IMPORTED_MODULE_5__["required"], _validation__WEBPACK_IMPORTED_MODULE_5__["email"]]
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(redux_form__WEBPACK_IMPORTED_MODULE_4__["Field"], {
+          name: "password",
+          label: "Password",
+          component: renderInput,
+          className: "form-control",
+          type: "password",
+          validate: [_validation__WEBPACK_IMPORTED_MODULE_5__["required"], Object(_validation__WEBPACK_IMPORTED_MODULE_5__["minValue"])(5)]
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "row bootom card-footer bg-info"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "submit",
+          disabled: this.props.invalid || this.props.submitting || this.props.pristine,
+          className: "btn btn-success text-white form-con"
+        }, this.props.submitting ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fa fa-spinner fa-spin"
+        }) : '', "Submit"))))))));
+      }
     }
   }]);
 
   return Login;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-Login = Object(redux_form__WEBPACK_IMPORTED_MODULE_2__["reduxForm"])({
+Login = Object(redux_form__WEBPACK_IMPORTED_MODULE_4__["reduxForm"])({
   form: 'loginForm',
   destroyOnUnmount: false
 })(Login);
