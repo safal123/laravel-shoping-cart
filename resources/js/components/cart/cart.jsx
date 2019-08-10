@@ -25,13 +25,13 @@ const cart = (props) => {
 
   if (products.length > 0) {
     return (
-      <div className="container">
-        <div className="d-flex flex-row bg-info mt-2 justify-content-center">
+      <div className="" style={{ padding: "20px" }}>
+        <div className="d-flex flex-row  mt-2 justify-content-center">
           <h1>Items on cart:{props.totalItems} items</h1>
         </div>
 
         <table id="cart" className="table table-hover table-condensed mt-2">
-          <thead className="bg-success">
+          <thead className="">
             <tr>
               <th style={{ width: "50%" }}>Product</th>
               <th style={{ width: "10%" }}>Price</th>
@@ -71,18 +71,17 @@ const cart = (props) => {
                 </td>
               </tr>
             ))}
-            <tr className="bg-success">
+            <tr className="">
               <td></td>
               <td></td>
               <td></td>
-              <td>
+              <td className="">
                 <h5>Total Price: ${props.totalPrice.toFixed(2)}</h5>
               </td>
               <td></td>
             </tr>
           </tbody>
         </table>
-        <hr />
         <div className="btn-btn-group">
           <Link to="/react/allProducts" className="btn btn-success">
             <i className="fa fa-hand-o-left" aria-hidden="true"></i> &nbsp;

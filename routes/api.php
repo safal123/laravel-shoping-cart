@@ -17,10 +17,23 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::get('/products', 'Api\ProductController@index')->middleware('jwt.auth');
 Route::get('/products', 'Api\ProductController@index');
 
 Route::post('/login',[
   'as' => 'login.login',
-  'uses' => 'Api\Auth\LoginController@login',
+  'uses' => 'Api\Auth\UserController@login',
 ]);
+
+Route::post('/logout',[
+  'as' => 'logout.logout',
+  'uses' => 'Api\Auth\UserController@logout',
+]);
+
+Route::group([
+  'middleware' => ['jwt.auth'],
+  'namespace' => 'Api'
+  ], function () {
+    Route::get('/orders', 'OrderController@index');
+    Route::get('/refresh', 'Auth\UserController@refresh');
+});
+

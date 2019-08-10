@@ -19,12 +19,12 @@ class Products extends Component {
     }
     else {
       return (
-        <div className="container">
+        <div className="" style={{ padding: "20px" }}>
           <div className="row">
             <div className="col-md-12">
-              <div className="d-flex mt-1 bg-success justify-content-center">
+              {/* <div className="d-flex mt-1 bg-success justify-content-center">
                 <h1>All Products</h1>
-              </div>
+              </div> */}
               
               <Product products={products}/>
               <Pagination

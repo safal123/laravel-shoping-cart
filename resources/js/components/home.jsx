@@ -13,7 +13,7 @@ export default class HomeComponent extends Component {
   render() {
     return (
       <div>
-        <div style={{ minHeight: "100vh" }}>
+        <div style={{ minHeight: "80vh" }}>
           <RouterPage />
         </div>
         <Footer />

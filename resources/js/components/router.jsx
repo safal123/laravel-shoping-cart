@@ -7,6 +7,7 @@ import Products from './products/products';
 import Cart from './cart/cart';
 import ProductDetail from './products/productDetail';
 import Login from './login';
+import Account from './account';
 import NotFound from './notFound';
 
 class RouterPage extends Component {
@@ -24,6 +25,7 @@ class RouterPage extends Component {
             // [a-z]+ for the string can also be used for safe
             <Route path="/react/allProducts/:id(\d+)" exact={true} component={ProductDetail} />
             <Route path="/react/login" exact={true} component={Login} />
+            <Route path="/react/account" exact={true} component={Account} />
             <Route path="" component={NotFound} />
           </Switch>
         </div>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function cartEmpty() {
   return (
-    <div className="container mt-2">
+    <div className="" style={{ padding: "20px" }}>
       <div className="card">
         <div className="card-header">
           <i className="fa fa-cart-plus fa-10x"></i> Your cart is empty.

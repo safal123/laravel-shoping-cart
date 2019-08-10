@@ -5,12 +5,14 @@ import { reducer as formReducer } from 'redux-form';
 
 import productReducer from '../reducers/productReducer';
 import cartReducer from '../reducers/cartReducer';
+import authReducer from '../reducers/authReducer';
 
 //combine reducers known as root reducers.
 const rootReducer = combineReducers({
   products: productReducer,
   cart: cartReducer,
-  form: formReducer
+  form: formReducer,
+  auth: authReducer
 });
 
 export default () => {

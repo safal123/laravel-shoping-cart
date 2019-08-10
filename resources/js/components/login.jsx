@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import axios from "axios";
 
 import Loader from './loader';;
+import { loginUser } from '../actions/authAction';
 import { reset, reduxForm, Field } from 'redux-form';
 import { required, email, minValue } from '../validation';
 
@@ -27,8 +28,7 @@ class Login extends Component {
       isLoading: false,
     }
   }
-
-
+  
   componentDidMount() {
     const auth = window.localStorage.getItem('auth');
     if (auth) {
@@ -44,10 +44,11 @@ class Login extends Component {
     }
     axios.post("http://localhost:8000/api/login", data)
       .then(res => {
-        dispatch(reset("loginForm"));
         const token = res.data.token
         window.localStorage.setItem("auth", token);
         this.setState({ isLoading: false });
+        this.props.loginUser(res.data.user);
+        dispatch(reset("loginForm"));
         this.props.history.push("/react");
         console.log(res.data);
       }).
@@ -106,7 +107,6 @@ class Login extends Component {
                         {this.props.submitting ?
                           <i className="fa fa-spinner fa-spin"></i>
                         : ''}
-                        
                         Submit
                       </button>
                     </div>
@@ -127,4 +127,4 @@ Login = reduxForm({
 })(Login);
 
 export default
-  connect(null)(Login);
+  connect(null, { loginUser })(Login);
