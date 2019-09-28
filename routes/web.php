@@ -5,8 +5,12 @@ Route::get('/react/{path?}/',[
   'as' => 'react'
 ])->where('path', '.*');
 
-Auth::routes();
-Route::get('/', 'HomeController@index')->name('home');
+Auth::routes(['verify' => 'true']);
+
+Route::get('/', 'HomeController@index')
+  ->name('home')
+  ->middleware('verified');
+
 Route::resource('/products', 'Frontend\ProductsController');
 
 Route::get('/cart',[
@@ -54,3 +58,10 @@ Route::get('/cart/decrement/{id}/{qty}',[
   'as' => 'cart.decrement'
 ]);
 
+
+Route::group(['prefix' => 'admin', 'namespace'=>'Admin'], function () {
+    Route::get('/', 'HomeController@index')->name('admin.home');
+    Route::get('/products', 'ProductsController@index')->name('admin.products');
+    Route::get('/products/create', 'ProductsController@create')->name('admin.products.create');
+    Route::post('/products/create', 'ProductsController@store')->name('admin.products.store');
+});

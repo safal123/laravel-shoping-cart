@@ -6,6 +6,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'orders';
+
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
+
+    // If we want to customize the name of columns used to
+    // store timestamps we can change as below
+    // const CREATED_AT = 'creation_date';
+    // const UPDATED_AT = 'last_update';
+
     protected $fillable = [
       'user_id',
       'billing_email',
@@ -32,6 +51,7 @@ class Order extends Model
 
     public function products()
     {
-      return $this->belongsToMany('App\Product')->withPivot('quantity');
+      return $this->belongsToMany('App\Product')
+                  ->withPivot('quantity');
     }
 }

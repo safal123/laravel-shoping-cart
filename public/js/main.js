@@ -7,3 +7,16 @@ $('#payment-form').on('submit', function () {
   button.attr('disabled', 'disabled');
   return false;
 });
+
+// $.ajaxSetup({
+//   headers: {
+//     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//   }
+// });
+
+// $(".product-create").click(function(e) {
+//   e.preventDefault();
+//   alert('I am clicked.');
+// });
+
+
