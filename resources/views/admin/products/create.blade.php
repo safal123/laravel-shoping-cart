@@ -8,6 +8,15 @@
       <div class="card-header">
         <h3 class="card-title">Create new product</h3>
       </div>
+      <!-- <div id="result"></div> -->
+      <div class="alert alert-danger m-2" style="display:none">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+      </div>
+
       <!-- /.card-header -->
       <!-- form start -->
       <!-- <form action="{{ route('admin.products.store') }}" method="POST" id="productsForm"> -->
@@ -16,12 +25,14 @@
         <div class="card-body">
           <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" name="name" class="form-control" id="name" placeholder="Enter product name">
+            <input type="text" name="name" class="form-control" id="productName" placeholder="Enter product name">
+            <div class="error"></div>
           </div>
           <div class="form-group">
             <label for="description">Description</label>
-            <textarea rows="4" cols="50" name="description" class="form-control">
+            <textarea rows="4" cols="50" id="productDescription" name="description" class="form-control">
             </textarea>
+            <!-- <div class="error"></div> -->
           </div>
           <div class="form-group">
             <label for="image">Image</label>
@@ -51,6 +62,7 @@
           <button type="submit" class="product-create btn btn-primary">Create new product</button>
         </div>
       </form>
+      
     </div>
   </div>
 <!-- /.card -->
@@ -67,6 +79,9 @@
 
     $(".product-create").click(function(e) {
       e.preventDefault();
+      $('.alert-danger').hide();
+      $('.error').html('');
+      $('.alert-danger').html('');
       var name=$("input[name=name]").val();
       var description=$("textarea[name=description]").val();
       var image=$("input[name=image]").val();
@@ -78,7 +93,7 @@
         type: 'POST',
         url: '/admin/products/create',
         data:{
-          "_token": "{{ csrf_token() }}",
+          _token: "{{ csrf_token() }}",
           name: name, 
           description: description, 
           image: image,
@@ -88,6 +103,18 @@
         },
         success:function(data){
           alert(data.success);
+        },
+        error: function (request, status, error) {
+            json = $.parseJSON(request.responseText);
+            $.each(json.errors, function(key, value){
+                $('.alert-danger').show();
+                if(key !==null && key == 'name') {
+                  $("#productName").css("border-color", "red");
+                  $('.error').html(value).css('color', 'red');
+                }
+                $('.alert-danger').append('<p>'+value+'</p>');
+            });
+            $("#result").html('');
         }
       });
     });

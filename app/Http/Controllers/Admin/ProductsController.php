@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Product;
+use App\Http\Requests\StoreProductsRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -37,11 +38,11 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductsRequest $request)
     {
         $input = request()->all();
-        dd($input);
-        return response()->json(['success'=>'Got Simple Ajax Request.']);
+        // dd($input);
+        return response()->json(['success'=>'Product saved successfully.']);
     }
 
     /**
