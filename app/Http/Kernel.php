@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'isCartEmpty'=> \App\Http\Middleware\CheckCartIsEmpty::class,
         'jwt-auth' => \App\Http\Middleware\jwtMiddleware::class,
+        'api-header' => \App\Http\Middleware\API::class,
     ];
 
     /**

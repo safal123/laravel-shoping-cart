@@ -2,12 +2,35 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
+use App\User;
+use JWTAuth;
+use JWTAuthException;
 use Illuminate\Support\Facades\Auth; 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Controller;
 
 class UserController extends Controller
 {
+    public function getToken($email, $password)
+    {
+      $token = null;
+      try {
+        if(!$token = JWTAuth::attempt( ['email'=>$email, 'password'=>$password])){
+          return response()->json([
+              'response' => 'error',
+              'message' => 'Password or email is invalid',
+              'token'=>$token
+          ]);
+        }
+      } catch (JWTAuthException $e) {
+        return response()->json([
+            'response' => 'error',
+            'message' => 'Token creation failed',
+        ]);
+      }
+      return $token;
+    }
+
     // Refresh auth token
     public function refresh() 
     {
@@ -35,8 +58,9 @@ class UserController extends Controller
       ];
       return response()->json([
         'user' => $user,
+        'success' => true,
         'token' => $token
-        ]);
+      ], 200);
     }
 
     public function logout() {
@@ -53,4 +77,39 @@ class UserController extends Controller
           'message' => 'Thank you.'
       ], 200);
     }
+
+    public function register(Request $request)
+    {
+      $data = [
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => \Hash::make($request->password)
+      ];
+      $validate = $request->validate([
+          'name' => 'required',
+          'email' => 'required|email|unique:users',
+          'password' => 'required'
+      ]);
+      //dd($validate);
+      $user = new User($data);
+      if($user->save()) {
+        $token = self::getToken($request->email, $request->password); // generate user token
+        if (!is_string($token))  return response()->json(['success'=>false,'data'=>'Token generation failed'], 201);
+        $user = \App\User::where('email', $request->email)->get()->first();
+        // $user->auth_token = $token; // update user token
+        $user->save();
+        $response = [
+            'success'=>true, 
+            'data'=>['name'=>$user->name,'id'=>$user->id,'email'=>$request->email,'auth_token'=>$token]
+        ]; 
+      } else {
+        $response = [
+            'success'=>false, 
+            'data'=>'Couldnt register user'
+        ];
+      }
+      return response()->json($response, 201);
+    }
+    
 }
+

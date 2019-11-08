@@ -19,10 +19,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/products', 'Api\ProductController@index');
 
-Route::post('/login',[
-  'as' => 'login.login',
-  'uses' => 'Api\Auth\UserController@login',
-]);
+Route::group(['middleware' => 'api-header'], function () {
+    Route::post('/login',[
+        'as' => 'login.login',
+        'uses' => 'Api\Auth\UserController@login',
+    ]);
+  Route::post('/register',[
+    'as' => 'register.register',
+    'uses' => 'Api\Auth\UserController@register',
+  ]);
+});
 
 Route::post('/logout',[
   'as' => 'logout.logout',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Product;
+use App\Category;
 use App\Http\Requests\StoreProductsRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(10);
+        $products = Product::latest()->paginate(10);
 
         return view('admin.products.index', 
           compact('products', $products));
@@ -29,7 +30,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        $categories = Category::all();
+
+        return view('admin.products.create', compact('categories', $categories));
     }
 
     /**
@@ -41,8 +44,15 @@ class ProductsController extends Controller
     public function store(StoreProductsRequest $request)
     {
         $input = request()->all();
-        // dd($input);
-        return response()->json(['success'=>'Product saved successfully.']);
+
+        $products = Product::create($input);
+
+        if($products){
+          return response()->json(['success'=>'Product saved successfully.']);
+        } else{
+          return response()->json(['success'=>'Something went wrong.']);
+        }
+        
     }
 
     /**

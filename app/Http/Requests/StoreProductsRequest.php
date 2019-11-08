@@ -25,11 +25,21 @@ class StoreProductsRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'category_id' => 'required',
             'description' => 'required',
             'image' => 'required',
-            'price' => 'required',
+            'price' => 'required|numeric',
             'discount' => 'required',
             'is_active' => 'required'
         ];
     }
+
+  public function messages()
+  {
+      return [
+          'name.required' => 'Product name is required.',
+          'category_id.required'  => 'Please select product category.',
+          'is_active.required' => 'Please select if the product is active.',
+      ];
+  }
 }
