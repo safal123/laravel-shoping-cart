@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from "axios";
 
-import Loader from './loader';;
+import Loader from './loader';
 import { loginUser } from '../actions/authAction';
 import { reset, reduxForm, Field } from 'redux-form';
 import { required, email, minValue } from '../validation';

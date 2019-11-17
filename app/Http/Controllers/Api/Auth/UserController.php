@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
-use App\User;
 use JWTAuth;
+use App\User;
 use JWTAuthException;
-use Illuminate\Support\Facades\Auth; 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth; 
 use App\Http\Controllers\Api\Controller;
 
 class UserController extends Controller

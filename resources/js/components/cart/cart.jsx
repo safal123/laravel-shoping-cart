@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+
 import {
     removeFromCart,
     clearCart,
@@ -82,17 +83,18 @@ const cart = (props) => {
                     </tbody>
                 </table>
                 <div className="btn-btn-group">
-                    <Link to="/react/allProducts" className="btn btn-success">
+                    <Link to="/react/allProducts" className="btn btn-success btn-sm">
                         <i className="fa fa-hand-o-left" aria-hidden="true"></i> &nbsp;
                         Continue shopping
                     </Link>
-                    <div className="btn btn-danger"
+                    <div className="btn btn-danger btn-sm"
                         onClick={() => clearCartItems()}>
                         <i className="fa fa-trash" aria-hidden="true"></i> Clear Cart
                     </div>
-                    <div className="btn btn-info">
-                        <i className="fa fa-shopping-bag" aria-hidden="true"></i> Check Out
-                    </div>
+                    <Link to="/react/check-out" className="btn btn-sm btn-primary">
+                        <i className="fa fa-shopping-bag" aria-hidden="true"></i>
+                        Check out
+                    </Link>
                 </div>
             </div>
         )

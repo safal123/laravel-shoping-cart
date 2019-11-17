@@ -37,10 +37,14 @@ class Header extends Component {
                 Authorization: `Bearer ${localStorage.auth}`
             };
             axios.post("http://localhost:8000/api/logout", {},
-                { headers: { ...headers } }).then(() => {
+                { headers: { ...headers } })
+                .then(() => {
                     this.props.logoutUser();
                     localStorage.removeItem('auth');
                 });
+        } else {
+            this.props.logoutUser();
+            localStorage.removeItem('auth');
         }
     }
 

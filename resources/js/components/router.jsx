@@ -12,21 +12,11 @@ import Register from './register';
 import Account from './account';
 import NotFound from './notFound';
 import PrivateRoute from './privateRoute';
-
-
+import Checkout from './cart/checkOut';
 
 class RouterPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            auth: false
-        };
-    }
-    checkAuth() {
-        const checkAuth = this.props.auth == true ? true : false;
-        this.setState = {
-            auth: checkAuth
-        }
     }
     render() {
         const authState = this.props.auth;
@@ -35,15 +25,38 @@ class RouterPage extends Component {
                 <div>
                     <Header />
                     <Switch >
-                        <Route path="/react" exact={true} component={Landing} />
-                        <Route path="/react/allProducts" exact={true} component={Products} />
-                        <Route path="/react/cart" exact={true} component={Cart} />
+                        <Route
+                            path="/react"
+                            exact={true}
+                            component={Landing} />
+                        <Route
+                            path="/react/allProducts"
+                            exact={true}
+                            component={Products} />
+                        <Route
+                            path="/react/cart"
+                            exact={true}
+                            component={Cart} />
                         // \d+ is the regex for only integer params,
                         // \w+ is for the string routes
                         // [a-z]+ for the string can also be used for safe
-                        <Route path="/react/allProducts/:id(\d+)" exact={true} component={ProductDetail} />
-                        <Route path="/react/login" exact={true} component={Login} />
-                        <Route path="/react/register" exact={true} component={Register} />
+                        <Route
+                            path="/react/allProducts/:id(\d+)"
+                            exact={true}
+                            component={ProductDetail} />
+                        <Route
+                            path="/react/login"
+                            exact={true}
+                            component={Login} />
+                        <Route
+                            path="/react/register"
+                            exact={true}
+                            component={Register} />
+                        <PrivateRoute
+                            path="/react/check-out"
+                            exact={true}
+                            component={Checkout}
+                            auth={authState} />
                         <PrivateRoute
                             path="/react/account"
                             exact={true}

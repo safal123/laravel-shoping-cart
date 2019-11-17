@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+
 import { addToCart, removeFromCart } from '../../actions/cartAction';
 
 class Product extends Component {
@@ -9,25 +10,6 @@ class Product extends Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
-        this.state = {
-            inCart: false,
-            cartId: [],
-            products: this.props.cartItems
-        }
-    }
-
-    componentDidMount() {
-        // console.log(this.props.cartItems);
-        // if (this.props.cartItems) {
-        //     const cartProductItems = this.props.cartItems.map(function (item) {
-        //         return item['id']
-        //     });
-        //     this.setState({
-        //         cartId: cartProductItems
-        //     })
-        //     // cartProductItems.includes(product.id)
-        // }
-
     }
 
     handleClick(product) {
@@ -38,7 +20,6 @@ class Product extends Component {
         this.props.removeFromCart(product);
     }
 
-
     render() {
         const cartProductItems = this.props.cartItems.map(function (item) {
             return item['id']
@@ -48,7 +29,7 @@ class Product extends Component {
             <div className="row" >
                 {
                     this.props.products && this.props.products.map(product => (
-                        <div className="col-md-4 mt-1" key={product.id}>
+                        <div className="col-12 col-md-6 col-lg-4" key={product.id}>
                             <div className="card">
                                 <Link to={`/react/allProducts/${product.id}`}>
                                     <img
@@ -57,36 +38,37 @@ class Product extends Component {
                                         alt="Card image cap" />
                                 </Link>
                                 <div className="card-body">
-                                    <hr />
-                                    <h5 className="card-title">{product.name}</h5>
-                                    <div className="row flex">
-                                        <div className="col-md-5">
-                                            AUD {product.price.toFixed(2)}
+                                    <h4 className="card-title">{product.name}</h4>
+                                    <div className="row">
+                                        <div className="col">
+                                            <p className="btn btn-sm btn-amber-outline btn-block">AUD${product.price}</p>
                                         </div>
-                                        <div className="col-md-7">
-                                            {cartProductItems.includes(product.id) ?
-                                                <div className="btn-group">
-                                                    <Link to="/react/cart" className="btn btn-amber">
-                                                        <i className="fa fa-check"></i>
+                                        {cartProductItems.includes(product.id) ?
+                                            <div className="col">
+                                                <div className="btn-group" role="group">
+                                                    <Link to="/react/cart" className="btn btn-sm btn-success">
                                                         view
                                                     </Link>
-                                                    <div className="btn btn-amber"
-                                                        onClick={
-                                                            () => this.removeItemFromCart(product)
-                                                        }
+                                                    <div className="btn btn-sm btn-danger"
+                                                        onClick={() => { this.removeItemFromCart(product) }}
                                                     >
-                                                        <i className="fa fa-remove"></i>
+                                                        Remove
                                                     </div>
-                                                </div> :
-                                                <button className="btn btn-sm btn-success" onClick={() => { this.handleClick(product) }}>
-                                                    <i className="fa fa-shopping-cart"></i> add to cart
+                                                </div>
+                                            </div> :
+                                            <div className="col">
+                                                <button className="btn btn-sm btn-success btn-block"
+                                                    onClick={() => {
+                                                        this.handleClick(product);
+                                                    }}>
+                                                    <i className="fa fa-shopping-cart"></i> Buy
                                                 </button>
-
-                                            }
-                                        </div>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     ))
                 }
