@@ -110,6 +110,21 @@ class UserController extends Controller
       }
       return response()->json($response, 201);
     }
+
+    public function getCurrentUser() 
+    {
+        if(Auth::check()){
+
+            $user = Auth::user();
+            if(!$user){
+                return response()->json(['message', 'User not found'], 400);
+            }
+        return response()->json(['user', $user], 200);
+        }
+        
+    }
+
+
     
 }
 

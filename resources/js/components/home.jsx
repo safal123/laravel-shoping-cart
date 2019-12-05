@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react'
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
-import configureStore from '../store';
-import RouterPage from './router';
-import Footer from './footer';
-import Loader from './loader';
-
+import configureStore from "../store";
+import RouterPage from "./route/router";
+import Footer from "./common/footer";
+import Loader from "./loader/loader";
 
 const { store, persistor } = configureStore();
 
@@ -32,13 +31,13 @@ export default class HomeComponent extends Component {
     }
 }
 
-if (document.getElementById('root')) {
+if (document.getElementById("root")) {
     ReactDOM.render(
         <Provider store={store}>
             <PersistGate loading={<Loader />} persistor={persistor}>
                 <HomeComponent />
             </PersistGate>
-        </Provider >,
-        document.getElementById('root')
+        </Provider>,
+        document.getElementById("root")
     );
 }

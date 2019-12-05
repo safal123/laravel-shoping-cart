@@ -32,6 +32,12 @@ Route::group([
         Route::get('/orders', 'OrderController@index');
         Route::get('/refresh', 'Auth\UserController@refresh');
         Route::post('/checkout', 'StripeCheckoutController@checkout');
+        Route::get('/currentUser', 'Auth\UserController@getCurrentUser');
+        //Route::get('/userLists','UsersListController@index');
     }
 );
+
+Route::get('/userLists','Api\UsersListController@index');
+Route::post('/userLists','Api\UsersListController@store');
+Route::delete('/userLists/{id}','Api\UsersListController@destroy');
 

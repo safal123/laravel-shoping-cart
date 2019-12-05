@@ -1,68 +1,91 @@
-import React, { useState } from 'react'
-import { connect } from 'react-redux';
-import StripeCheckout from 'react-stripe-checkout';
-import axios from 'axios';
+import React, { useState, useEffect, useRef } from "react";
+import { connect } from "react-redux";
+import StripeCheckout from "react-stripe-checkout";
+import axios from "axios";
 
-import { logoutUser } from '../../actions/authAction';
-import { clearCart } from '../../actions/cartAction';
-import Loader from '../loader';
+import { logoutUser } from "../../actions/authAction";
+import { clearCart } from "../../actions/cartAction";
+import Loader from "../loader/loader";
 
 const iconContainer = {
-    marginBottom: '20px',
-    padding: '7px 0',
-    fontSize: '24px'
+    marginBottom: "20px",
+    padding: "7px 0",
+    fontSize: "24px"
 };
 
-const checkOut = (props) => {
-    const [loading, setLoading] = useState('false');
+const checkOut = props => {
+    const [loading, setLoading] = useState(false);
 
-    async function handleToken(token, addresses) {
-        setLoading('true');
+    const isMounted = useRef(null);
+
+    useEffect(() => {
+        // executed when component mounted
+        isMounted.current = true;
+        return () => {
+            // executed when unmount
+            isMounted.current = false;
+        };
+    }, []);
+
+    function handleToken(token) {
+        setLoading(true);
         const headers = {
             Accept: "application/json",
             Authorization: `Bearer ${localStorage.auth}`
         };
-        await axios.post('http://localhost:8000/api/checkout', token,
-            { headers: { ...headers } })
+        const data = {
+            amount: props.totalPrice
+        };
+        axios
+            .post(
+                "http://localhost:8000/api/checkout",
+                { token, data },
+                {
+                    headers: { ...headers }
+                }
+            )
             .then(res => {
-                props.clearCart();
-                window.location = "/react/allProducts";
-                setLoading('false');
-            }).
-            catch((error) => {
-                const resStatus = error.response.status;
-                if (resStatus === 401) {
+                if (res.status == 200) {
+                    setLoading("false");
+                    props.clearCart();
+                    props.history.push("/react/allProducts");
+                }
+            })
+            .catch(error => {
+                if (error && error.response.status === 401) {
+                    setLoading(false);
                     props.logoutUser();
-                    localStorage.removeItem('auth');
-                    setLoading('false');
-                    window.location = "/react/login";
+                    localStorage.removeItem("auth");
+                    props.history.push("/react/login");
+                }
+            })
+            .finally(() => {
+                if (isMounted.current) {
+                    setLoading(false);
                 }
             });
-
     }
 
-    function onSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault();
     }
 
-    const cartItems = props.cartItems;
+    const { cartItems } = props;
 
-    if (loading === 'true') {
+    const totalAmountInCart = props.totalPrice;
 
-        return <Loader />
-
+    if (loading === "true") {
+        return <Loader />;
     } else {
         return (
             <div className="container mt-2">
                 <div className="row">
                     <div className="col-12 col-md-12 col-lg-8">
                         <div className="card mb-2">
-                            <div className="card-header">
-                                Billing details
-                            </div>
+                            <div className="card-header">Billing details</div>
                             <div className="card-body">
-                                <form onSubmit={onSubmit}>
-                                    <label htmlFor="full-name">
+                                <form onSubmit={handleSubmit}>
+                                    {/* <label htmlFor="full-name">
                                         <i className="fa fa-user"></i> Full name
                                     </label>
                                     <div className="form-group">
@@ -88,31 +111,42 @@ const checkOut = (props) => {
                                             className="form-control"
                                             placeholder="Full Address"
                                         />
-                                    </div>
+                                    </div> */}
                                     <hr />
                                     <h3>Payment</h3>
                                     <label name="fname">Accepted Cards</label>
                                     <div style={iconContainer}>
-                                        <i className="fa fa-cc-visa" style={{ color: 'navy' }}></i> &nbsp;
-                                        <i className="fa fa-cc-amex" style={{ color: 'blue' }}></i>&nbsp;
-                                        <i className="fa fa-cc-mastercard" style={{ color: 'red' }}></i> &nbsp;
-                                        <i className="fa fa-cc-discover" style={{ color: 'orange' }}></i> &nbsp;
+                                        <i
+                                            className="fa fa-cc-visa"
+                                            style={{ color: "navy" }}
+                                        ></i>{" "}
+                                        &nbsp;
+                                        <i
+                                            className="fa fa-cc-amex"
+                                            style={{ color: "blue" }}
+                                        ></i>
+                                        &nbsp;
+                                        <i
+                                            className="fa fa-cc-mastercard"
+                                            style={{ color: "red" }}
+                                        ></i>{" "}
+                                        &nbsp;
+                                        <i
+                                            className="fa fa-cc-discover"
+                                            style={{ color: "orange" }}
+                                        ></i>{" "}
+                                        &nbsp;
                                     </div>
 
                                     {/* <input type="submit" value="Continue to checkout" className="btn btn-info"></input> */}
                                     <StripeCheckout
                                         token={handleToken}
                                         stripeKey="pk_test_JkAIcCpg8ZNjJjl23c6oNQna"
-                                    // name="Three Comma Co."
-                                    // description="Big Data Stuff"
-                                    // shippingAddress
-                                    // billingAddress
-                                    // allowRememberMe={false}
+                                        amount={totalAmountInCart * 100}
                                     >
                                         <button className="btn btn-primary">
                                             Pay now
                                         </button>
-
                                     </StripeCheckout>
                                 </form>
                             </div>
@@ -121,31 +155,47 @@ const checkOut = (props) => {
                     <div className="col-12 col-md-12 col-lg-4">
                         <div className="card mb-2">
                             <div className="card-header">
-                                <h4>Cart <span className="price"><i className="fa fa-shopping-cart"></i> <b>{cartItems.length}</b></span></h4>
+                                <h4>
+                                    Cart{" "}
+                                    <span className="price">
+                                        <i className="fa fa-shopping-cart"></i>{" "}
+                                        <b>{cartItems.length}</b>
+                                    </span>
+                                </h4>
                             </div>
                             <div className="card-body">
-
                                 <table className="table table-hover">
                                     <tbody>
-                                        {cartItems.map((item) =>
+                                        {cartItems.map(item => (
                                             <tr key={item.id}>
                                                 <td>
                                                     <p>
-                                                        <a href="#">{item.name}</a>
-
+                                                        <a href="#">
+                                                            {item.name}
+                                                        </a>
                                                     </p>
                                                 </td>
                                                 <td>
-                                                    <span className="price">${item.price}</span>
+                                                    <span className="price">
+                                                        ${item.price}
+                                                    </span>
                                                 </td>
-
                                             </tr>
-                                        )}
+                                        ))}
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td></td>
-                                            <td><p>Total <span className="price"><b>${props.totalPrice}</b></span></p></td>
+                                            <td>
+                                                <p>
+                                                    Total{" "}
+                                                    <span className="price">
+                                                        <b>
+                                                            ${props.totalPrice}
+                                                        </b>
+                                                    </span>
+                                                </p>
+                                            </td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -154,14 +204,14 @@ const checkOut = (props) => {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
-}
+};
 
 const mapStateToProps = state => ({
     cartItems: state.cart.items,
-    totalPrice: state.cart.totalPrice
+    totalPrice: state.cart.totalPrice,
+    isAuthenticated: state.auth.isAuthenticated
 });
-
 
 export default connect(mapStateToProps, { logoutUser, clearCart })(checkOut);
