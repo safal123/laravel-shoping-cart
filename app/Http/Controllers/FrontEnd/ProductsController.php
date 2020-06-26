@@ -16,7 +16,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(8);
+        $products = Product::where('is_active', true)->paginate(8);
         if($products) {
           return view('frontend.products.index')
                 ->with('products', $products);

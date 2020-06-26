@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateOrdersTable extends Migration
 {
@@ -18,11 +18,11 @@ class CreateOrdersTable extends Migration
 
             $table->unsignedBigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')
-                  ->references('id')
-                  ->on('users')
-                  ->onUpdate('cascade')
-                  ->onDelete('set null');
-                  
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('set null');
+
             $table->string('billing_email');
             $table->string('billing_name');
             $table->string('billing_address');
@@ -30,9 +30,9 @@ class CreateOrdersTable extends Migration
             $table->string('billing_name_on_card');
             $table->string('billing_discount_code');
             $table->integer('billing_discount');
-            $table->integer('billing_subtotal');
+            $table->float('billing_subtotal', 8, 2);
             $table->integer('billing_tax');
-            $table->integer('billing_total');
+            $table->float('billing_total', 8, 2);
             $table->string('payment_method')->default('stripe');
             $table->boolean('shipped')->default(false);
             $table->string('error')->nullable();

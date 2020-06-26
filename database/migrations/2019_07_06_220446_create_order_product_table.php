@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateOrderProductTable extends Migration
 {
@@ -13,22 +13,23 @@ class CreateOrderProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_product', function (Blueprint $table) {
+        Schema::create('order_products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('order_id')->unsigned()->nullable();
             $table->foreign('order_id')
-                  ->references('id')
-                  ->on('orders')
-                  ->onUpdate('cascade')
-                  ->onDelete('set null');
+                ->references('id')
+                ->on('orders')
+                ->onUpdate('cascade')
+                ->onDelete('set null');
 
             $table->unsignedBigInteger('product_id')->unsigned()->nullable();
             $table->foreign('product_id')
-                  ->references('id')
-                  ->on('products')
-                  ->onUpdate('cascade')
-                  ->onDelete('set null');
+                ->references('id')
+                ->on('products')
+                ->onUpdate('cascade')
+                ->onDelete('set null');
             $table->integer('quantity')->unsigned();
+            $table->bigInteger('price');
             $table->timestamps();
         });
     }

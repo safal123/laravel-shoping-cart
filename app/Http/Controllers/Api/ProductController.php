@@ -11,7 +11,8 @@ class ProductController extends Controller
 {
     public function index()
     {
-      $products = Product::latest()->paginate(6);
+      $products = Product::paginate(6);
+
       return  ProductResource::collection($products);
     }
 }

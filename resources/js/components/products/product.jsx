@@ -22,36 +22,12 @@ class Product extends Component {
         const cartProductItems = this.props.cartItems.map(function(item) {
             return item["id"];
         });
-        const { gridView } = this.props;
-        if (gridView) {
-            return this.gridView(cartProductItems);
-        }
-        return (
-            <ul className="list-group">
-                {this.props.products &&
-                    this.props.products.map(product => (
-                        <li className="list-group-item">
-                            <img
-                                height="100"
-                                width="100"
-                                className="img-responsive"
-                                src="https://review.chinabrands.com/chinabrands/seo/image/20180710/fqffqfqfq.png"
-                                alt="Card image cap"
-                            />
-                            {product.name}
-                        </li>
-                    ))}
-            </ul>
-        );
-    }
-
-    gridView(cartProductItems) {
         return (
             <div className="row">
                 {this.props.products &&
                     this.props.products.map(product => (
                         <div
-                            className="col-12 col-md-6 col-lg-4"
+                            className="col-sm-12 col-md-6 col-lg-4"
                             key={product.id}
                         >
                             <div className="card">
@@ -80,12 +56,12 @@ class Product extends Component {
                                                     className="btn-group btn-block"
                                                     role="group"
                                                 >
-                                                    <Link
+                                                    {/* <Link
                                                         to="/react/cart"
                                                         className="btn btn-sm btn-success"
                                                     >
-                                                        view
-                                                    </Link>
+                                                        In cart
+                                                    </Link> */}
                                                     <div
                                                         className="btn btn-sm btn-danger"
                                                         onClick={() => {
@@ -108,7 +84,7 @@ class Product extends Component {
                                                         );
                                                     }}
                                                 >
-                                                    <i className="fa fa-shopping-cart"></i>{" "}
+                                                    <i className="fa fa-shopping-cart"></i>
                                                     Buy
                                                 </button>
                                             </div>

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Product;
 use App\Category;
-use App\Http\Requests\StoreProductsRequest;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductsRequest;
+use App\Product;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class ProductsController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +20,8 @@ class ProductsController extends Controller
     {
         $products = Product::latest()->paginate(10);
 
-        return view('admin.products.index', 
-          compact('products', $products));
+        return view('admin.products.index',
+            compact('products', $products));
     }
 
     /**
@@ -43,16 +44,45 @@ class ProductsController extends Controller
      */
     public function store(StoreProductsRequest $request)
     {
-        $input = request()->all();
+        $product = new Product();
 
-        $products = Product::create($input);
-
-        if($products){
-          return response()->json(['success'=>'Product saved successfully.']);
-        } else{
-          return response()->json(['success'=>'Something went wrong.']);
+        if ($request->hasFile('image')) {
+            $storagepath = $request->file('image')->store('public/products');
+            $fileName = basename($storagepath);
+            $data['image'] = 'products/' . $fileName;
         }
-        
+
+        $data['name'] = $request->get('name');
+        $data['description'] = $request->get('description');
+        $data['category_id'] = $request->get('category_id');
+        $data['price'] = $request->get('price');
+        $data['is_active'] = $request->get('is_active');
+        $data['discount'] = $request->get('discount');
+
+        DB::beginTransaction();
+
+        try {
+            $product = Product::create(
+                [
+                    'name' => $data['name'],
+                    'description' => $data['description'],
+                    'category_id' => $data['category_id'],
+                    'image' => $data['image'],
+                    'price' => $data['price'],
+                    'is_active' => $data['is_active'],
+                    'discount' => $data['discount'],
+                ]
+            );
+
+            DB::commit();
+            return response()->json(['success' => 'Product added successfully.']);
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            $message = str_replace(array("\r", "\n", "'", "`"), ' ', $e->getMessage());
+            // return $message;
+            return response()->json(['error' => $message], 500);
+        }
     }
 
     /**

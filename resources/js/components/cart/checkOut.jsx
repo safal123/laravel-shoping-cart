@@ -13,16 +13,17 @@ const iconContainer = {
     fontSize: "24px"
 };
 
-const checkOut = props => {
+const CheckOut = props => {
     const [loading, setLoading] = useState(false);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [address, setAddress] = useState("");
 
     const isMounted = useRef(null);
 
     useEffect(() => {
-        // executed when component mounted
         isMounted.current = true;
         return () => {
-            // executed when unmount
             isMounted.current = false;
         };
     }, []);
@@ -34,7 +35,10 @@ const checkOut = props => {
             Authorization: `Bearer ${localStorage.auth}`
         };
         const data = {
-            amount: props.totalPrice
+            amount: props.totalPrice,
+            name,
+            email,
+            address
         };
         axios
             .post(
@@ -45,6 +49,7 @@ const checkOut = props => {
                 }
             )
             .then(res => {
+                console.log(res.data);
                 if (res.status == 200) {
                     setLoading("false");
                     props.clearCart();
@@ -68,6 +73,7 @@ const checkOut = props => {
 
     function handleSubmit(e) {
         e.preventDefault();
+        handleToken();
     }
 
     const { cartItems } = props;
@@ -85,33 +91,47 @@ const checkOut = props => {
                             <div className="card-header">Billing details</div>
                             <div className="card-body">
                                 <form onSubmit={handleSubmit}>
-                                    {/* <label htmlFor="full-name">
+                                    <label htmlFor="full-name">
                                         <i className="fa fa-user"></i> Full name
                                     </label>
                                     <div className="form-group">
-                                        <input type="text"
+                                        <input
+                                            type="text"
                                             className="form-control"
                                             placeholder="Full name"
+                                            onChange={e =>
+                                                setName(e.target.value)
+                                            }
                                         />
                                     </div>
                                     <label htmlFor="email">
-                                        <i className="fa fa-envelope"></i> Email Address
+                                        <i className="fa fa-envelope"></i> Email
+                                        Address
                                     </label>
                                     <div className="form-group">
-                                        <input type="email"
+                                        <input
+                                            type="email"
                                             className="form-control"
                                             placeholder="Email Address"
+                                            onChange={e =>
+                                                setEmail(e.target.value)
+                                            }
                                         />
                                     </div>
                                     <label htmlFor="address">
-                                        <i className="fa fa-institution"></i> Address
+                                        <i className="fa fa-institution"></i>{" "}
+                                        Address
                                     </label>
                                     <div className="form-group">
-                                        <input type="text"
+                                        <input
+                                            type="text"
                                             className="form-control"
-                                            placeholder="Full Address"
+                                            placeholder="Address"
+                                            onChange={e =>
+                                                setAddress(e.target.value)
+                                            }
                                         />
-                                    </div> */}
+                                    </div>
                                     <hr />
                                     <h3>Payment</h3>
                                     <label name="fname">Accepted Cards</label>
@@ -137,8 +157,6 @@ const checkOut = props => {
                                         ></i>{" "}
                                         &nbsp;
                                     </div>
-
-                                    {/* <input type="submit" value="Continue to checkout" className="btn btn-info"></input> */}
                                     <StripeCheckout
                                         token={handleToken}
                                         stripeKey="pk_test_JkAIcCpg8ZNjJjl23c6oNQna"
@@ -214,4 +232,4 @@ const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, { logoutUser, clearCart })(checkOut);
+export default connect(mapStateToProps, { logoutUser, clearCart })(CheckOut);

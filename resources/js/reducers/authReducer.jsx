@@ -2,7 +2,7 @@ import * as actionType from "../actions/actionType";
 
 const initialState = {
     isAuthenticated: false,
-    authUser: []
+    authUser: [],
 };
 
 const authReducer = (state = initialState, action) => {
@@ -12,13 +12,13 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 authUser: action.payload,
-                isAuthenticated: token ? true : false
+                isAuthenticated: token ? true : false,
             };
 
         case actionType.LOGOUT:
             localStorage.removeItem("auth");
             return {
-                ...initialState
+                ...initialState,
             };
         default:
             return state;

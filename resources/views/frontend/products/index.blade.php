@@ -2,43 +2,74 @@
 
 @section('content')
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="row">
-        @foreach($products as $product)
-          <div class="col-sm-3 mt-1">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="/img/2.jpg" alt="Card image cap">
-              <div class="card-body">
-                <hr>
-                <h5 class="card-title">{{ $product->name }}</h5>
-                <!-- <p class="card-text">{{str_limit($product->description, 50)}} <a href="{{ route('products.show', [$product->id] ) }}" class="">...Read more</a></p> -->
-                <div class="row">
-                  <div class="col-md-6 mt-2">
-                    AU<i class="fa fa-dollar"></i> {{ $product->price }}
-                  </div>
-                  <div class="col-md-6">
-                    <form action="{{ route('cart.add') }}" method="POST">
-                      {{ csrf_field() }}
-                      <input type="hidden" name="qty" value="1" />
-                      <input type="hidden" 
-                        name="product_id" value="{{ $product->id }}"/> 
-                      <button class="btn btn-sm btn-info">
-                        <i class="fa fa-shopping-cart"></i>
-                        Add to cart
-                      </button>
-                    </form>
-                  </div>
+    <div class="col">
+        <div class="row ">
+            @foreach($products as $product)
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card">
+                    <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title"><a href="product.html" title="View Product">{{ $product->name }}</a></h4>
+                        <p class="card-text">{{ $product->description }}</p>
+                        <div class="row">
+                            <div class="col">
+                                <p class="btn btn-danger btn-block">{{ $product->price }}.00 $</p>
+                            </div>
+                            <div class="col">
+                                <form action="{{ route('cart.add') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="qty" value="1" />
+                                    <input type="hidden"
+                                        name="product_id" value="{{ $product->id }}"/>
+                                    <button class="btn btn-info btn-block">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        Add to cart
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-        @endforeach
-      </div>
-      <!-- Links for pagination and going to edit on vendor publish
-      later to modify the default layout of pagination of bootstrap -->
-      <!-- {{ $products->links() }} -->
+            @endforeach
+        </div>
     </div>
-  </div>
 </div>
+<!-- <div class="container">
+    <div class="row">
+        <div class="col">
+            @foreach($products as $product)
+                <div class="row">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card">
+                        <img class="card-img-top" src="https://dummyimage.com/600x400/55595c/fff" alt="Card image cap">
+                        <div class="card-body">
+                            <h4 class="card-title"><a href="product.html" title="View Product">{{ $product->name }}</a></h4>
+                            <p class="card-text">{{ $product->description }}</p>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="btn btn-danger btn-block">{{ $product->price }} $</p>
+                                </div>
+                                <div class="col">
+                                    <form action="{{ route('cart.add') }}" method="POST">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="qty" value="1" />
+                                        <input type="hidden"
+                                            name="product_id" value="{{ $product->id }}"/>
+                                        <button class="btn btn-info btn-block">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            Add to cart
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div
+            @endforeach
+        </div
+    </div>
+</div> -->
+
+{{ $products->links() }}
 @endsection

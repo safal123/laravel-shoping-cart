@@ -4,10 +4,9 @@ namespace App;
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable  implements JWTSubject, MustVerifyEmail
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
@@ -40,20 +39,26 @@ class User extends Authenticatable  implements JWTSubject, MustVerifyEmail
 
     public function orders()
     {
-      return $this->hasMany('App\Order');
-    }
-
-    public function userLists()
-    {
-      return $this->hasMany('App\UserList');
+        return $this->hasMany('App\Order');
     }
 
     public function getJWTIdentifier()
     {
-      return $this->getKey();
+        return $this->getKey();
     }
     public function getJWTCustomClaims()
     {
-      return [];
+        return [];
+    }
+
+    /**
+     * @param string $childType
+     * @param mixed $value
+     * @param string|null $field
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    public function resolveChildRouteBinding($childType, $value, $field)
+    {
+        // TODO: Implement resolveChildRouteBinding() method.
     }
 }

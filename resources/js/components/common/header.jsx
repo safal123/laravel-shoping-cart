@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
+import { headers } from "../../axios/headers";
 
 import {
     Collapse,
@@ -9,7 +10,7 @@ import {
     NavbarToggler,
     Nav,
     NavItem,
-    NavLink
+    NavLink,
 } from "reactstrap";
 import { logoutUser } from "../../actions/authAction";
 
@@ -19,38 +20,39 @@ class Header extends Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             isOpen: false,
-            isLogged: false
+            isLogged: false,
         };
     }
 
     toggle() {
         this.setState({
-            isOpen: !this.state.isOpen
+            isOpen: !this.state.isOpen,
         });
     }
 
     logout() {
         if (localStorage.auth) {
-            const headers = {
-                Accept: "application/json",
-                Authorization: `Bearer ${localStorage.auth}`
-            };
+            // const headers = {
+            //     Accept: "application/json",
+            //     Authorization: `Bearer ${localStorage.auth}`,
+            // };
             axios
                 .post(
                     "http://localhost:8000/api/logout",
                     {},
                     { headers: { ...headers } }
                 )
-                .then(response => {
+                .then((response) => {
                     this.props.logoutUser();
                     localStorage.removeItem("auth");
                     this.props.history.push("/react/login");
                 })
-                .catch(err => {
-                    if (err.response.status == 401) {
-                        this.logoutAction();
-                    }
-                    console.log(err.response);
+                .catch((err) => {
+                    localStorage.removeItem("auth");
+                    // if (err.response.status == 401) {
+                    //     this.logoutAction();
+                    // }
+                    console.log(err.response)
                 });
         } else {
             this.props.logoutUser();
@@ -69,9 +71,6 @@ class Header extends Component {
             <div>
                 <Navbar className="" color="dark" dark expand="md">
                     <div className="container">
-                        <Link to="/react" className="navbar-brand">
-                            <i className="fa fa-home"></i>Shop
-                        </Link>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="" navbar>
@@ -84,7 +83,7 @@ class Header extends Component {
                                     </Link>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink href="/" className="nav-link">
+                                    <NavLink href="/" className="nav-link disabled" disabled={true}>
                                         <i className="fa fa-react"></i>Laravel
                                     </NavLink>
                                 </NavItem>
@@ -98,7 +97,7 @@ class Header extends Component {
                                             className="text-light"
                                             style={{
                                                 verticalAlign: "super",
-                                                fontSize: "smaller"
+                                                fontSize: "smaller",
                                             }}
                                         >
                                             ({cartTotalItems})
@@ -158,17 +157,17 @@ class Header extends Component {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     totalItems: state.cart.totalItems,
     auth: state.auth.isAuthenticated,
-    user: state.auth.authUser
+    user: state.auth.authUser,
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
     return {
         logoutUser: () => {
             dispatch(logoutUser());
-        }
+        },
     };
 };
 

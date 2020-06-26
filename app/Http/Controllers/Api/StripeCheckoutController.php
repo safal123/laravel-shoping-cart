@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
-use Stripe;
-use JWTAuth;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Api\Controller;
+use Illuminate\Http\Request;
+use JWTAuth;
+use Stripe;
 
 class StripeCheckoutController extends Controller
 {
-    public function checkout(Request $request) 
-    {   
-        //dd($request->token['id']);
+    public function checkout(Request $request)
+    {
+        dd($request->all());
         try {
-            if (! $token = JWTAuth::parseToken()) {
+            if (!$token = JWTAuth::parseToken()) {
                 return response()->json('Something went wrong.');
             }
             $charge = Stripe::charges()->create([

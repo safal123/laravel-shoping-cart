@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-const account = props => {
+const Account = props => {
     if (!props.isAuthenticated) {
         <Redirect to="/login" />;
     }
@@ -59,4 +59,4 @@ const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps)(account);
+export default connect(mapStateToProps)(Account);

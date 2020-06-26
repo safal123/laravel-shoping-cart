@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
 import configureStore from "../store";
-import RouterPage from "./route/router";
-import Footer from "./common/footer";
+import RouterPage from "./route/Router";
+import Footer from "./common/Footer";
 import Loader from "./loader/loader";
 
 const { store, persistor } = configureStore();
@@ -21,12 +21,12 @@ export default class HomeComponent extends Component {
 
     render() {
         return (
-            <div>
+            <Fragment>
                 <div style={{ minHeight: "80vh" }}>
                     <RouterPage />
                 </div>
                 <Footer />
-            </div>
+            </Fragment>
         );
     }
 }

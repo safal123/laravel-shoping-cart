@@ -1,0 +1,23 @@
+Next thing to do on the website are as follows:
+
+1. Add order_products many to many relationship -- done
+2. Show product category on the admin dashboaerd (CRUD) -- done
+3. Display products according to category -- pending
+4. Orders processnig
+    i. Pending
+    ii. Processnig
+    iii. Shipped 
+    iv. Delivered
+        Send email to the user according to the order status.
+5. Email notifications
+6. Ques jobs
+7. Product details page
+8. Edit and update product
+9. Make product gallery
+10. Change front UI design
+    - Product display design
+    - Single product display design
+11. Login using facebook, google, github
+12. Integrate pay using paypal
+13. Refund and process order on admin panel
+

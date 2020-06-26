@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 
+import { loginUser } from "../../actions/authAction";
+
 class Register extends Component {
     constructor(props) {
         super(props);
@@ -42,6 +44,9 @@ class Register extends Component {
                     rePassword: "",
                     errors: ""
                 });
+                // const token = res.data.token;
+                // window.localStorage.setItem("auth", token);
+                // this.props.loginUser(res.data.user);
             })
             .catch(error => {
                 this.setState({
@@ -60,8 +65,8 @@ class Register extends Component {
             return <Redirect to="/react" />;
         }
         return (
-            <div className="container">
-                <div className="card">
+            <div className="">
+                <div className="card mt-2">
                     <div className="card-header d-flex justify-content-center bg-info">
                         Register
                     </div>
@@ -168,4 +173,4 @@ const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps)(Register);
+export default connect(mapStateToProps, { loginUser })(Register);

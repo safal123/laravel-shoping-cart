@@ -1,9 +1,10 @@
-body{
-  margin-top:20px;
-  background:#eee;
+body {
+    /* margin-top: 20px; */
+    background: #eee;
+    background: url("{{asset('/img/spinner.gif')}}");
 }
-h1{
-  color: #1ab394 !important
+h1 {
+    color: #1ab394 !important;
 }
 h3 {
     font-size: 16px;
@@ -12,101 +13,101 @@ h3 {
     color: #1ab394;
 }
 .cart-product-imitation {
-  text-align: center;
-  padding-top: 30px;
-  height: 80px;
-  width: 80px;
-  background-color: #f8f8f9;
+    text-align: center;
+    padding-top: 30px;
+    height: 80px;
+    width: 80px;
+    background-color: #f8f8f9;
 }
 .product-imitation.xl {
-  padding: 120px 0;
+    padding: 120px 0;
 }
 .product-desc {
-  padding: 20px;
-  position: relative;
+    padding: 20px;
+    position: relative;
 }
 .ecommerce .tag-list {
-  padding: 0;
+    padding: 0;
 }
 .ecommerce .fa-star {
-  color: #d1dade;
+    color: #d1dade;
 }
 .ecommerce .fa-star.active {
-  color: #f8ac59;
+    color: #f8ac59;
 }
 .ecommerce .note-editor {
-  border: 1px solid #e7eaec;
+    border: 1px solid #e7eaec;
 }
 table.shoping-cart-table {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 table.shoping-cart-table tr td {
-  border: none;
-  text-align: right;
+    border: none;
+    text-align: right;
 }
 table.shoping-cart-table tr td.desc,
 table.shoping-cart-table tr td:first-child {
-  text-align: left;
+    text-align: left;
 }
 table.shoping-cart-table tr td:last-child {
-  width: 80px;
+    width: 80px;
 }
 .ibox {
-  clear: both;
-  margin-bottom: 25px;
-  margin-top: 0;
-  padding: 0;
+    clear: both;
+    margin-bottom: 25px;
+    margin-top: 0;
+    padding: 0;
 }
 .ibox.collapsed .ibox-content {
-  display: none;
+    display: none;
 }
 .ibox:after,
 .ibox:before {
-  display: table;
+    display: table;
 }
 .ibox-title {
-  -moz-border-bottom-colors: none;
-  -moz-border-left-colors: none;
-  -moz-border-right-colors: none;
-  -moz-border-top-colors: none;
-  background-color: #ffffff;
-  border-color: #e7eaec;
-  border-image: none;
-  border-style: solid solid none;
-  border-width: 3px 0 0;
-  color: inherit;
-  margin-bottom: 0;
-  padding: 14px 15px 7px;
-  min-height: 48px;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #ffffff;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 3px 0 0;
+    color: inherit;
+    margin-bottom: 0;
+    padding: 14px 15px 7px;
+    min-height: 48px;
 }
 .ibox-content {
-  background-color: #ffffff;
-  color: inherit;
-  padding: 15px 20px 20px 20px;
-  border-color: #e7eaec;
-  border-image: none;
-  border-style: solid solid none;
-  border-width: 1px 0;
+    background-color: #ffffff;
+    color: inherit;
+    padding: 15px 20px 20px 20px;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0;
 }
 .ibox-footer {
-  color: inherit;
-  border-top: 1px solid #e7eaec;
-  font-size: 90%;
-  background: #ffffff;
-  padding: 10px 15px;
+    color: inherit;
+    border-top: 1px solid #e7eaec;
+    font-size: 90%;
+    background: #ffffff;
+    padding: 10px 15px;
 }
 
 .badge {
-  padding-left: 9px;
-  padding-right: 9px;
-  -webkit-border-radius: 9px;
-  -moz-border-radius: 9px;
-  border-radius: 9px;
+    padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
 }
 
 .label-warning[href],
 .badge-warning[href] {
-  background-color: #c67605;
+    background-color: #c67605;
 }
 #lblCartCount {
     font-size: 12px;
@@ -114,45 +115,129 @@ table.shoping-cart-table tr td:last-child {
     color: #fff;
     padding: 0 5px;
     vertical-align: top;
-    margin-left: -10px; 
+    margin-left: -10px;
 }
 
 .StripeElement {
-  box-sizing: border-box;
+    box-sizing: border-box;
 
-  height: 40px;
+    height: 40px;
 
-  padding: 10px 12px;
+    padding: 10px 12px;
 
-  border: 1px solid transparent;
-  border-radius: 4px;
-  background-color: white;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: white;
 
-  box-shadow: 0 1px 3px 0 #e6ebf1;
-  -webkit-transition: box-shadow 150ms ease;
-  transition: box-shadow 150ms ease;
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
 }
 
 .StripeElement--focus {
-  box-shadow: 0 1px 3px 0 #cfd7df;
+    box-shadow: 0 1px 3px 0 #cfd7df;
 }
 
 .StripeElement--invalid {
-  border-color: #fa755a;
+    border-color: #fa755a;
 }
 
 .StripeElement--webkit-autofill {
-  background-color: #fefde5 !important;
+    background-color: #fefde5 !important;
 }
 
-.item-quantity{
-  width: 30px;
-  text-align: center;
-  outline: none;
+.item-quantity {
+    width: 30px;
+    text-align: center;
+    outline: none;
 }
 
-.cart-add{
-  padding: 2px;
-  margin: 0 auto;
-  text-align: center;
+.cart-add {
+    padding: 2px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/*
+** Style Simple Ecommerce Theme for Bootstrap 4
+** Created by T-PHP https://t-php.fr/43-theme-ecommerce-bootstrap-4.html
+*/
+.bloc_left_price {
+    color: #c01508;
+    text-align: center;
+    font-weight: bold;
+    font-size: 150%;
+}
+.category_block li:hover {
+    background-color: #007bff;
+}
+.category_block li:hover a {
+    color: #ffffff;
+}
+.category_block li a {
+    color: #343a40;
+}
+.add_to_cart_block .price {
+    color: #c01508;
+    text-align: center;
+    font-weight: bold;
+    font-size: 200%;
+    margin-bottom: 0;
+}
+.add_to_cart_block .price_discounted {
+    color: #343a40;
+    text-align: center;
+    text-decoration: line-through;
+    font-size: 140%;
+}
+.product_rassurance {
+    padding: 10px;
+    margin-top: 15px;
+    background: #ffffff;
+    border: 1px solid #6c757d;
+    color: #6c757d;
+}
+.product_rassurance .list-inline {
+    margin-bottom: 0;
+    text-transform: uppercase;
+    text-align: center;
+}
+.product_rassurance .list-inline li:hover {
+    color: #343a40;
+}
+
+.windows8 {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    margin: auto;
+}
+
+.spinner {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: rgb(112, 180, 178); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner > img {
+    width: 100px;
+}
+
+.spinner.hidden {
+    animation: fadeOut 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
 }

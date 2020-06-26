@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
 
-import Loader from "../loader/loader";
 import { loginUser } from "../../actions/authAction";
 import { reset, reduxForm, Field } from "redux-form";
 import { required, email, minValue } from "../../validation";
@@ -28,7 +27,6 @@ class Login extends Component {
     }
 
     submitLoginForm(formValues, dispatch) {
-        this.setState({ isLoading: true });
         const data = {
             email: formValues.email,
             password: formValues.password
@@ -38,10 +36,9 @@ class Login extends Component {
             .then(res => {
                 const token = res.data.token;
                 window.localStorage.setItem("auth", token);
-                this.setState({ isLoading: false });
+                // this.setState({ isLoading: false });
                 this.props.loginUser(res.data.user);
                 dispatch(reset("loginForm"));
-                // this.props.history.push("/react");
                 console.log(res.data);
             })
             .catch(error => {
@@ -50,8 +47,6 @@ class Login extends Component {
                 });
                 dispatch(reset("loginForm"));
                 this.setState({ isLoading: false });
-
-                console.log(error.response.data.error);
             });
     }
     render() {
@@ -59,88 +54,78 @@ class Login extends Component {
         if (isAuthenticated) {
             return <Redirect to="/react" />;
         }
-        if (this.state.isLoading) {
-            return <Loader />;
-        } else {
-            return (
-                <div className="container">
-                    <div className="row justify-content-center mt-2">
-                        <div className="col-lg-10">
-                            {this.state.message ? (
-                                <div
-                                    className="alert alert-danger"
-                                    role="alert"
-                                >
-                                    {this.state.message}
-                                </div>
-                            ) : (
-                                ""
-                            )}
-                            <div className="card">
-                                <div className="card-header d-flex justify-content-center bg-info">
-                                    Login Page
-                                </div>
+        return (
+            <div className="container">
+                <div className="row justify-content-center mt-2">
+                    <div className="col-lg-10">
+                        {this.state.message ? (
+                            <div className="alert alert-danger" role="alert">
+                                {this.state.message}
+                            </div>
+                        ) : (
+                            ""
+                        )}
+                        <div className="card">
+                            <div className="card-header d-flex justify-content-center bg-info">
+                                Login Page
+                            </div>
 
-                                <div className="card-body">
-                                    <form
-                                        onSubmit={handleSubmit(
-                                            this.submitLoginForm.bind(this)
-                                        )}
-                                    >
-                                        <Field
-                                            name="email"
-                                            label="Email"
-                                            type="email"
-                                            component={renderInput}
-                                            className="form-control"
-                                            validate={[required, email]}
-                                        />
-                                        <Field
-                                            name="password"
-                                            label="Password"
-                                            component={renderInput}
-                                            className="form-control"
-                                            type="password"
-                                            validate={[required, minValue(5)]}
-                                        />
-                                        <div className="row bootom card-footer bg-info">
-                                            <button
-                                                type="submit"
-                                                disabled={
-                                                    this.props.invalid ||
-                                                    this.props.submitting ||
-                                                    this.props.pristine
-                                                }
-                                                className="btn btn-success text-white form-con"
-                                            >
-                                                {this.props.submitting ? (
-                                                    <i className="fa fa-spinner fa-spin"></i>
-                                                ) : (
-                                                    ""
-                                                )}
-                                                Submit
-                                            </button>
-                                        </div>
-                                    </form>
-                                    <p className="mt-2">
-                                        <span>
-                                            {" "}
-                                            Create new account?&nbsp;
-                                            <Link
-                                                to="/react/register"
-                                                className=""
-                                            >
-                                                Register
-                                            </Link>
-                                        </span>
-                                    </p>
-                                </div>
+                            <div className="card-body">
+                                <form
+                                    onSubmit={handleSubmit(
+                                        this.submitLoginForm.bind(this)
+                                    )}
+                                >
+                                    <Field
+                                        name="email"
+                                        label="Email"
+                                        type="email"
+                                        component={renderInput}
+                                        className="form-control"
+                                        validate={[required, email]}
+                                    />
+                                    <Field
+                                        name="password"
+                                        label="Password"
+                                        component={renderInput}
+                                        className="form-control"
+                                        type="password"
+                                        validate={[required, minValue(5)]}
+                                    />
+                                    <div className="row bootom card-footer bg-info">
+                                        <button
+                                            type="submit"
+                                            disabled={
+                                                this.props.invalid ||
+                                                this.props.submitting ||
+                                                this.props.pristine
+                                            }
+                                            className="btn btn-success text-white form-con"
+                                        >
+                                            {this.props.submitting ? (
+                                                <i className="fa fa-spinner fa-spin"></i>
+                                            ) : (
+                                                ""
+                                            )}
+                                            Submit
+                                        </button>
+                                    </div>
+                                </form>
+                                <p className="mt-2">
+                                    <span>
+                                        {" "}
+                                        Create new account?&nbsp;
+                                        <Link to="/react/register" className="">
+                                            Register
+                                        </Link>
+                                    </span>
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
-            );
-        }
+            </div>
+        );
     }
 }
 

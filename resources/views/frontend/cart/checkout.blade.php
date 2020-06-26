@@ -23,7 +23,7 @@
                   </a>
                 </div>
               </div>
-              
+
             </div>
               <table class="table table-dark">
                 <thead>
@@ -50,7 +50,7 @@
                     <td>
                       {{ Cart::total() }}
                     </td>
-                    
+
                   </tr>
                 </tbody>
               </table>
@@ -65,7 +65,7 @@
           Proceed to checkout
         </a>
       </div>
-      
+
     </div>
   </div>
 @endsection
