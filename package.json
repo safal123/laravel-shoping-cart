@@ -10,6 +10,7 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
+<<<<<<< HEAD
         "@babel/preset-react": "^7.8.3",
         "axios": "^0.19.2",
         "cross-env": "^5.2.1",
@@ -17,11 +18,21 @@
         "lodash": "^4.17.15",
         "react": "^16.13.0",
         "react-dom": "^16.13.0",
+=======
+        "@babel/preset-react": "^7.0.0",
+        "axios": "^0.19",
+        "cross-env": "^5.1",
+        "laravel-mix": "^4.0.7",
+        "lodash": "^4.17.13",
+        "react": "^16.11.0",
+        "react-dom": "^16.11.0",
+>>>>>>> 186b1c3045068b03232fc96424889d1003265c59
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.26.3",
         "sass-loader": "^7.3.1"
     },
     "dependencies": {
+<<<<<<< HEAD
         "@fortawesome/fontawesome-svg-core": "^1.2.27",
         "@fortawesome/free-solid-svg-icons": "^5.12.1",
         "@fortawesome/react-fontawesome": "^0.1.9",
@@ -40,6 +51,23 @@
         "react-toastify": "^5.5.0",
         "reactstrap": "^8.4.1",
         "redux": "^4.0.5",
+=======
+        "@fortawesome/fontawesome-svg-core": "^1.2.19",
+        "@fortawesome/free-solid-svg-icons": "^5.9.0",
+        "@fortawesome/react-fontawesome": "^0.1.4",
+        "bootstrap": "^4.3.1",
+        "jquery": "^3.5.0",
+        "mdbootstrap": "^4.8.5",
+        "node-sass": "^4.12.0",
+        "react-bootstrap": "^1.0.0-beta.9",
+        "react-js-pagination": "^3.0.2",
+        "react-paginate": "^6.3.0",
+        "react-redux": "^7.1.0",
+        "react-router": "^5.0.1",
+        "react-router-dom": "^5.0.1",
+        "reactstrap": "^8.0.1",
+        "redux": "^4.0.4",
+>>>>>>> 186b1c3045068b03232fc96424889d1003265c59
         "redux-devtools-extension": "^2.13.8",
         "redux-form": "^8.3.1",
         "redux-persist": "^6.0.0",

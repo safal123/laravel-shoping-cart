@@ -2607,6 +2607,7 @@
         },
         {
             "name": "symfony/http-foundation",
+<<<<<<< HEAD
             "version": "v4.4.8",
             "source": {
                 "type": "git",
@@ -2617,6 +2618,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/http-foundation/zipball/ec5bd254c223786f5fa2bb49a1e705c1b8e7cee2",
                 "reference": "ec5bd254c223786f5fa2bb49a1e705c1b8e7cee2",
+=======
+            "version": "v4.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-foundation.git",
+                "reference": "8bccc59e61b41963d14c3dbdb23181e5c932a1d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/8bccc59e61b41963d14c3dbdb23181e5c932a1d5",
+                "reference": "8bccc59e61b41963d14c3dbdb23181e5c932a1d5",
+>>>>>>> 186b1c3045068b03232fc96424889d1003265c59
                 "shasum": ""
             },
             "require": {
@@ -2658,7 +2671,11 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2020-04-18T20:40:08+00:00"
+=======
+            "time": "2019-11-28T13:33:56+00:00"
+>>>>>>> 186b1c3045068b03232fc96424889d1003265c59
         },
         {
             "name": "symfony/http-kernel",
@@ -2752,6 +2769,7 @@
         },
         {
             "name": "symfony/mime",
+<<<<<<< HEAD
             "version": "v5.0.8",
             "source": {
                 "type": "git",
@@ -2762,6 +2780,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/mime/zipball/5d6c81c39225a750f3f43bee15f03093fb9aaa0b",
                 "reference": "5d6c81c39225a750f3f43bee15f03093fb9aaa0b",
+=======
+            "version": "v4.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/mime.git",
+                "reference": "010cc488e56cafe5f7494dea70aea93100c234df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/010cc488e56cafe5f7494dea70aea93100c234df",
+                "reference": "010cc488e56cafe5f7494dea70aea93100c234df",
+>>>>>>> 186b1c3045068b03232fc96424889d1003265c59
                 "shasum": ""
             },
             "require": {
@@ -2774,12 +2804,20 @@
             },
             "require-dev": {
                 "egulias/email-validator": "^2.1.10",
+<<<<<<< HEAD
                 "symfony/dependency-injection": "^4.4|^5.0"
+=======
+                "symfony/dependency-injection": "^3.4|^4.1|^5.0"
+>>>>>>> 186b1c3045068b03232fc96424889d1003265c59
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-master": "5.0-dev"
+=======
+                    "dev-master": "4.4-dev"
+>>>>>>> 186b1c3045068b03232fc96424889d1003265c59
                 }
             },
             "autoload": {
@@ -2810,7 +2848,11 @@
                 "mime",
                 "mime-type"
             ],
+<<<<<<< HEAD
             "time": "2020-04-17T03:29:44+00:00"
+=======
+            "time": "2019-11-30T08:27:26+00:00"
+>>>>>>> 186b1c3045068b03232fc96424889d1003265c59
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -2931,6 +2973,7 @@
         },
         {
             "name": "symfony/polyfill-intl-idn",
+<<<<<<< HEAD
             "version": "v1.15.0",
             "source": {
                 "type": "git",
@@ -2941,6 +2984,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/47bd6aa45beb1cd7c6a16b7d1810133b728bdfcf",
                 "reference": "47bd6aa45beb1cd7c6a16b7d1810133b728bdfcf",
+=======
+            "version": "v1.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-intl-idn.git",
+                "reference": "6f9c239e61e1b0c9229a28ff89a812dc449c3d46"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/6f9c239e61e1b0c9229a28ff89a812dc449c3d46",
+                "reference": "6f9c239e61e1b0c9229a28ff89a812dc449c3d46",
+>>>>>>> 186b1c3045068b03232fc96424889d1003265c59
                 "shasum": ""
             },
             "require": {
@@ -2954,7 +3009,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-master": "1.15-dev"
+=======
+                    "dev-master": "1.13-dev"
+>>>>>>> 186b1c3045068b03232fc96424889d1003265c59
                 }
             },
             "autoload": {
@@ -2989,6 +3048,7 @@
                 "portable",
                 "shim"
             ],
+<<<<<<< HEAD
             "time": "2020-03-09T19:04:49+00:00"
         },
         {
@@ -3003,6 +3063,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/81ffd3a9c6d707be22e3012b827de1c9775fc5ac",
                 "reference": "81ffd3a9c6d707be22e3012b827de1c9775fc5ac",
+=======
+            "time": "2019-11-27T13:56:44+00:00"
+        },
+        {
+            "name": "symfony/polyfill-mbstring",
+            "version": "v1.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-mbstring.git",
+                "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7b4aab9743c30be783b73de055d24a39cf4b954f",
+                "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f",
+>>>>>>> 186b1c3045068b03232fc96424889d1003265c59
                 "shasum": ""
             },
             "require": {
@@ -3014,7 +3090,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-master": "1.15-dev"
+=======
+                    "dev-master": "1.13-dev"
+>>>>>>> 186b1c3045068b03232fc96424889d1003265c59
                 }
             },
             "autoload": {
@@ -3048,7 +3128,11 @@
                 "portable",
                 "shim"
             ],
+<<<<<<< HEAD
             "time": "2020-03-09T19:04:49+00:00"
+=======
+            "time": "2019-11-27T14:18:11+00:00"
+>>>>>>> 186b1c3045068b03232fc96424889d1003265c59
         },
         {
             "name": "symfony/polyfill-php56",
@@ -3108,6 +3192,7 @@
         },
         {
             "name": "symfony/polyfill-php72",
+<<<<<<< HEAD
             "version": "v1.15.0",
             "source": {
                 "type": "git",
@@ -3118,6 +3203,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/37b0976c78b94856543260ce09b460a7bc852747",
                 "reference": "37b0976c78b94856543260ce09b460a7bc852747",
+=======
+            "version": "v1.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php72.git",
+                "reference": "66fea50f6cb37a35eea048d75a7d99a45b586038"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/66fea50f6cb37a35eea048d75a7d99a45b586038",
+                "reference": "66fea50f6cb37a35eea048d75a7d99a45b586038",
+>>>>>>> 186b1c3045068b03232fc96424889d1003265c59
                 "shasum": ""
             },
             "require": {
@@ -3126,7 +3223,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-master": "1.15-dev"
+=======
+                    "dev-master": "1.13-dev"
+>>>>>>> 186b1c3045068b03232fc96424889d1003265c59
                 }
             },
             "autoload": {
@@ -3159,7 +3260,11 @@
                 "portable",
                 "shim"
             ],
+<<<<<<< HEAD
             "time": "2020-02-27T09:26:54+00:00"
+=======
+            "time": "2019-11-27T13:56:44+00:00"
+>>>>>>> 186b1c3045068b03232fc96424889d1003265c59
         },
         {
             "name": "symfony/polyfill-php73",
