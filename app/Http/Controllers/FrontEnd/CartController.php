@@ -39,7 +39,6 @@ class CartController extends Controller
             Session::flash('success', 'Item added to cart.');
             return redirect()->back()->with($notification);
         }
-
     }
 
     public function view_cart()
@@ -114,5 +113,4 @@ class CartController extends Controller
 
         return redirect()->back()->with($notification);
     }
-
 }

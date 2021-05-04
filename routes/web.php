@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::redirect('/home', '/');
 
 Route::get('/react/{path?}/', [
@@ -65,9 +67,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/products', 'ProductController@index')->name('admin.products');
     Route::get('/products/create', 'ProductController@create')->name('admin.products.create');
     Route::post('/products/create', 'ProductController@store')->name('admin.products.store');
+
     Route::get('/orders', 'OrderController@index')->name('admin.orders.index');
     Route::get('/orders/{order}', 'OrderController@show')->name('admin.orders.show');
+
     Route::get('/categories', 'CategoryController@index')->name('admin.categories.index');
+    Route::get('/categories/create', 'CategoryController@create')->name('admin.categories.create');
+    Route::post('/categories', 'CategoryController@store')->name('admin.categories.store');
     Route::post('/categories/{id}', 'CategoryController@update');
     Route::delete('/categories/{id}', 'CategoryController@destroy');
+
+    Route::get('/transctions', 'StripeTransctionController@index')->name('admin.stripe.transctions');
+    Route::get('/transctions/{id}', 'StripeTransctionController@show')->name('admin.stripe.transctions.show');
 });

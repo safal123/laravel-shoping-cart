@@ -241,3 +241,20 @@ table.shoping-cart-table tr td:last-child {
         visibility: hidden;
     }
 }
+
+.carasol-image{
+    width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+
+/* 
+"php": "^7.2.5",
+        "barryvdh/laravel-cors": "^0.11.4",
+        "bumbummen99/shoppingcart": "^2.8",
+        "cartalyst/stripe-laravel": "^10.0",
+        "fideloper/proxy": "^4.2",
+        "laravel/framework": "^7.0",
+        "laravel/tinker": "^1.0",
+        "tymon/jwt-auth": "^1.0" */
