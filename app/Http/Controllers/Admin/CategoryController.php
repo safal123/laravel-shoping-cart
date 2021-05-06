@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('id', 'desc')->get();
 
         return view('admin.categories.index', compact('categories', $categories));
     }
@@ -21,15 +21,16 @@ class CategoryController extends Controller
         return view('admin.categories.create');
     }
 
-    public function store(Request $request)
-    {
-        $category = new Category();
-        $category->name = $request->name;
-        $category->description = $request->description;
-        $category->save();
+    // Moved to Livewire component
+    // public function store(Request $request)
+    // {
+    //     $category = new Category();
+    //     $category->name = $request->name;
+    //     $category->description = $request->description;
+    //     $category->save();
 
-        return redirect()->back();
-    }
+    //     return redirect()->back();
+    // }
 
     public function update(Request $request, $id)
     {

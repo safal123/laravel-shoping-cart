@@ -26,7 +26,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title float-right">
-                        <a href="{{ route('admin.products.create') }}" class="btn btn-outline-success">Add new Product</a>
+                        <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-outline-success">Add new Product</a>
                     </h3>
                 </div>
                 <!-- /.card-header -->

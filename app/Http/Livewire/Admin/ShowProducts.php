@@ -10,6 +10,8 @@ class ShowProducts extends Component
 {
     use WithPagination;
 
+    public $isLoading = false;
+
     public function render()
     {
         $products = Product::orderBy('id', 'desc')->paginate(5);
