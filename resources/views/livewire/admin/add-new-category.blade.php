@@ -8,7 +8,7 @@
         <div class="form-group">
             <label for="name">Description</label>
             <textarea wire:model="description" id="" cols="30" rows="10" class="form-control"></textarea>
-            @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+            @error('description') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
         <div class="card-footer bg-info">

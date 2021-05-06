@@ -1,7 +1,14 @@
 <div>
-    <div wire:poll>
-        Current time: {{ now() }}
+    <div>
+        @if (session()->has('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+        @endif
     </div>
+    <!-- <div wire:poll>
+        Current time: {{ now() }}
+    </div> -->
     <table class="table table-bordered">
         <thead>
             <tr>

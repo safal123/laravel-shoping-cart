@@ -1,7 +1,7 @@
 @extends('admin.layouts')
 
 @section('content')
-<section class="content-header">
+<section class="content-header bg-white mb-4 shadow">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
@@ -19,7 +19,7 @@
     </div><!-- /.container-fluid -->
 </section>
 <!-- Main content -->
-<section class="content">
+<section class="">
 
     <!-- Default box -->
     <div class="card">
@@ -29,17 +29,17 @@
                 Order #{{ $order->id }} details.
                 <br>
                 <span class="text-muted">
-                Paid on
-                {{ $order->created_at->monthName }}
-                {{ $order->created_at->day }},
-                {{ $order->created_at->year }} @
-                {{ date("h:i A", strtotime($order->created_at)) }}
-            </span>
+                    Paid on
+                    {{ $order->created_at->monthName }}
+                    {{ $order->created_at->day }},
+                    {{ $order->created_at->year }} @
+                    {{ date("h:i A", strtotime($order->created_at)) }}
+                </span>
             </h3>
 
             <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i class="fas fa-minus"></i></button>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i></button>
             </div>
         </div>
 
@@ -84,14 +84,14 @@
                 <div class="col-lg-4">
                     <h2>Shipping</h2>
                     @if(!$order->shipping_address)
-                        <h4>
+                    <h4>
                         <span class="badge badge-info">Same as billing address</span>
-                        </h4>
-                        {{$order->billing_name }} <br>
-                        {{ $order->billing_address}} <br>
-                        <h4 class="mt-2">Email Address</h4>
-                        {{ $order->billing_email }} <br>
-                        Phone: {{ $order->billing_phone }}
+                    </h4>
+                    {{$order->billing_name }} <br>
+                    {{ $order->billing_address}} <br>
+                    <h4 class="mt-2">Email Address</h4>
+                    {{ $order->billing_email }} <br>
+                    Phone: {{ $order->billing_phone }}
                     @else
 
                     @endif
@@ -108,8 +108,8 @@
         <div class="card-header">
             <h3 class="card-title text-bold">PDF Invoice Data</h3>
             <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i class="fas fa-minus"></i></button>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i></button>
             </div>
         </div>
 
@@ -123,8 +123,8 @@
         <div class="card-header">
             <h3 class="card-title text-bold">Products: {{ $order->products->count() }} items.</h3>
             <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i class="fas fa-minus"></i></button>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i></button>
             </div>
         </div>
 

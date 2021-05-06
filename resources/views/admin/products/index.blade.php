@@ -2,7 +2,7 @@
 
 @section('content')
 
-<section class="content-header bg-white mb-2">
+<section class="content-header bg-white mb-2 shadow">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
@@ -19,7 +19,7 @@
         </div>
     </div><!-- /.container-fluid -->
 </section>
-<section class="content">
+<section class="">
     <!-- /.row -->
     <div class="row">
         <div class="col-12">

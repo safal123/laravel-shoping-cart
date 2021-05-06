@@ -2,7 +2,7 @@
 
 @section('content')
 
-<section class="content-header">
+<section class="content-header bg-white mb-4 shadow">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
@@ -22,7 +22,7 @@
 <div class="card">
     <div class="card-header">
         <div class="d-flex justify-content-between align-items-center">
-            <h3 class="card-title">Categories</h3>
+            <h3 class="card-title text-info">Add New</h3>
             <div class="d-flex">
                 <a href="{{ route('admin.categories.index') }}" class="btn btn-outline-info btn-sm ml-2">View All</a>
                 <div class="card-tools">

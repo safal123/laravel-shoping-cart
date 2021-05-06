@@ -25,6 +25,7 @@ class ShowProducts extends Component
         $product = Product::find($id);
         $product->is_active ? $product->is_active = false : $product->is_active = true;
         $product->save();
+        session()->flash('message', 'Product status updated successfully.');
         return redirect()->back();
     }
 

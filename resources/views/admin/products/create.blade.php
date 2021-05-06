@@ -1,7 +1,7 @@
 @extends('admin.layouts')
 
 @section('content')
-<section class="content-header">
+<section class="content-header bg-white mb-2 shadow">
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
@@ -19,7 +19,7 @@
   </div><!-- /.container-fluid -->
 </section>
 
-<section class="content">
+<section class="">
   <!-- general form elements -->
   <div class="card">
     <div class="card-header">

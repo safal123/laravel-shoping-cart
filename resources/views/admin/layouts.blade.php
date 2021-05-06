@@ -35,13 +35,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="{{ route('admin.home')}}" class="nav-link">Home</a>
-        </li>
+        <!-- <li class="nav-item d-none d-sm-inline-block">
+          <a href="{{ route('admin.home')}}">Home</a>
+        </li> -->
       </ul>
 
       <!-- SEARCH FORM -->
-      <!-- <form class="form-inline ml-3">
+      <form class="form-inline ml-3">
         <div class="input-group input-group-sm">
           <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
           <div class="input-group-append">
@@ -50,7 +50,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </button>
           </div>
         </div>
-      </form> -->
+      </form>
 
     </nav>
     <!-- /.navbar -->
@@ -80,7 +80,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
             <li class="nav-item">
-              <a href="{{ route('admin.categories.index') }}" class="nav-link">
+              <a href="{{ route('admin.categories.index') }}" class="nav-link {{ request()->routeIs('admin.categories.index') ? 'bg-info text-white' : '' }}">
                 <i class="nav-icon fas fa-cat"></i>
                 <p>
                   Categories
@@ -88,7 +88,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('admin.products') }}" class="nav-link">
+              <a href="{{ route('admin.products') }}" class="nav-link {{ request()->routeIs('admin.products') ? 'bg-info text-white' : '' }}">
                 <i class="nav-icon fas fa-tag"></i>
                 <p>
                   Products
@@ -96,7 +96,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('admin.orders.index') }}" class="nav-link">
+              <a href="{{ route('admin.orders.index') }}" class="nav-link {{ request()->routeIs('admin.orders.index') ? 'bg-info text-white' : '' }}">
                 <i class="fa fa-users"></i>&nbsp;<p class="ml-1">Orders</p>
               </a>
             </li>
@@ -116,6 +116,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- <div class="spinner">
         <img src="{{ asset('/img/spinner.gif')}}" alt="spinner">
       </div> -->
+      <div>
+        @if (session()->has('message'))
+        <div class="alert alert-success shadow">
+          {{ session('message') }}
+        </div>
+        @endif
+      </div>
       @yield('content')
     </div>
     <!-- /.content-wrapper -->

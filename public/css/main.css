@@ -260,3 +260,7 @@ table.shoping-cart-table tr td:last-child {
     display: none;
 }
 
+.alert {
+    border-radius: 0px !important;
+}
+

@@ -32,7 +32,7 @@ class AddNewCategory extends Component
 
         $this->name = '';
         $this->description = '';
-
-        return redirect()->back();
+        session()->flash('message', 'Category created successfully.');
+        return redirect()->route('admin.categories.index');
     }
 }
