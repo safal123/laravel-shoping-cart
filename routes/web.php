@@ -45,12 +45,12 @@ Route::get('/cart/order', [
 Route::get('/cart/checkout', [
     'uses' => 'FrontEnd\CheckoutController@index',
     'as' => 'cart.confirm',
-]);
+])->middleware('auth');
 
 Route::post('/cart/checkout', [
     'uses' => 'FrontEnd\CheckoutController@payment',
     'as' => 'payment',
-]);
+])->middleware('auth');
 
 Route::get('/cart/increment/{id}/{qty}', [
     'uses' => 'FrontEnd\CartController@increment',
@@ -79,4 +79,5 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
     Route::get('/transctions', 'StripeTransctionController@index')->name('admin.stripe.transctions');
     Route::get('/transctions/{id}', 'StripeTransctionController@show')->name('admin.stripe.transctions.show');
+    Route::post('/transctions/refund', 'StripeTransctionController@refund')->name('admin.stripe.transctions.refund');
 });

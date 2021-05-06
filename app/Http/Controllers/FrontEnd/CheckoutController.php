@@ -33,8 +33,7 @@ class CheckoutController extends Controller
                 'source' => $request->stripeToken,
                 'description' => 'Order',
                 'receipt_email' => 'pokharelsafal66@gmail.com',
-                'metadata' => [
-                ],
+                'metadata' => [],
             ]);
 
             $order = $this->addToOrdersTable($request, null);
@@ -48,7 +47,6 @@ class CheckoutController extends Controller
             Session::flash('success', 'Purchase successfull.');
 
             return redirect()->route('home');
-
         } catch (CardErrorException $e) {
 
             $this->addToOrdersTable($request, $e->getMessage());
@@ -56,7 +54,6 @@ class CheckoutController extends Controller
             Session::flash('alert', $e->getMessage());
 
             return back()->withErrors('alert', $e->getMessage());
-
         }
     }
 
@@ -92,5 +89,4 @@ class CheckoutController extends Controller
 
         return $order;
     }
-
 }

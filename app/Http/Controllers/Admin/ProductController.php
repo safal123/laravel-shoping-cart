@@ -18,10 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::latest()->paginate(10);
-
-        return view('admin.products.index',
-            compact('products', $products));
+        return view('admin.products.index');
     }
 
     /**
@@ -76,7 +73,6 @@ class ProductController extends Controller
 
             DB::commit();
             return response()->json(['success' => 'Product added successfully.']);
-
         } catch (\Exception $e) {
             DB::rollback();
             $message = str_replace(array("\r", "\n", "'", "`"), ' ', $e->getMessage());

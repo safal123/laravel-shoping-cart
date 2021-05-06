@@ -120,15 +120,11 @@ table.shoping-cart-table tr td:last-child {
 
 .StripeElement {
     box-sizing: border-box;
-
     height: 40px;
-
     padding: 10px 12px;
-
     border: 1px solid transparent;
     border-radius: 4px;
     background-color: white;
-
     box-shadow: 0 1px 3px 0 #e6ebf1;
     -webkit-transition: box-shadow 150ms ease;
     transition: box-shadow 150ms ease;
@@ -248,13 +244,19 @@ table.shoping-cart-table tr td:last-child {
     display: block;
 }
 
+.card, .btn, input, .form-control, file {
+  border-radius: 0px !important;
+}
 
-/* 
-"php": "^7.2.5",
-        "barryvdh/laravel-cors": "^0.11.4",
-        "bumbummen99/shoppingcart": "^2.8",
-        "cartalyst/stripe-laravel": "^10.0",
-        "fideloper/proxy": "^4.2",
-        "laravel/framework": "^7.0",
-        "laravel/tinker": "^1.0",
-        "tymon/jwt-auth": "^1.0" */
+.text-sm {
+    font-size: 12px !important;
+}
+
+.p-2 {
+    padding: 10px;
+}
+
+.hidden {
+    display: none;
+}
+

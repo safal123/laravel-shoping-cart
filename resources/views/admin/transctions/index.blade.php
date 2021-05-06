@@ -25,6 +25,9 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    <div class="bg-info p-2 text-right mb-2">
+                        Total Amount : USD{{ $amount/100 }}
+                    </div>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>

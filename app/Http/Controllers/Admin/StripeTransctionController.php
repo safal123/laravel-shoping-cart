@@ -10,14 +10,26 @@ class StripeTransctionController extends Controller
 {
     public function index()
     {
+        $stripe = Stripe::make(env('STRIPE_SECRET'), '2018-02-28');
         $charges = Stripe::charges()->all()['data'];
         // dd($charges);
-        return view('admin.transctions.index', compact('charges'));
+        $balance = $stripe->balance()->current();
+        $amount = $balance['available'][0]['amount'];
+        return view('admin.transctions.index', compact('charges', 'amount'));
     }
 
     public function show($id)
     {
-        $charge = Stripe::charges()->retrieve($id, []);
-        dd($charge);
+        $stripe = Stripe::make(env('STRIPE_SECRET'), '2018-02-28');
+        $charge = $stripe->charges()->find($id);
+        // dd($stripe->customers()->all());
+        return view('admin.transctions.show', compact('charge'));
+    }
+
+    public function refund(Request $request)
+    {
+        $stripe = Stripe::make(env('STRIPE_SECRET'), '2018-02-28');
+        $refund = $stripe->refunds()->create($request->charge);
+        return redirect()->route('admin.stripe.transctions');
     }
 }

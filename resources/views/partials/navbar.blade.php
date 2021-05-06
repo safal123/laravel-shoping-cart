@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light shadow-sm">
+<nav class="navbar navbar-expand-md navbar-light shadow-sm bg-dark text-white">
   <div class="container">
     <a class="navbar-brand" href="{{ url('/') }}">
       Shop
@@ -40,7 +40,7 @@
           <a href="{{ route('cart.view') }}" class="nav-link">
             <i class="fa fa-shopping-cart"></i>
             Cart
-            <span class='badge badge-warning' id='lblCartCount'> {{Cart::content()->count()}} </span>
+            <span class='badge badge-warning' id='lblCartCount'> 0 </span>
           </a>
         </li>
         @guest
